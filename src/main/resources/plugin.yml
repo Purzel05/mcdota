@@ -1,0 +1,10 @@
+name: mcdota
+version: ${project.version}
+main: de.prentl.firsttestproject.Main
+api-version: 1.13
+authors: [Leo, Papa]
+description: n/a
+
+commands:
+  date:
+    description: Zeigt das Datum an
