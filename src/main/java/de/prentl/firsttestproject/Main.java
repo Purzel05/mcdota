@@ -1,5 +1,6 @@
 package de.prentl.firsttestproject;
 
+import de.prentl.firsttestproject.commands.BlueplayCommand;
 import de.prentl.firsttestproject.commands.DateCommand;
 import de.prentl.firsttestproject.listener.JoinListener;
 import de.prentl.firsttestproject.listener.QuitListener;
@@ -14,7 +15,7 @@ public final class Main extends JavaPlugin {
     public void onEnable() {
         Bukkit.getLogger().fine("Plugin wird aktiviert.");
         listenerRegistration();
-        //commandRegistration();
+        commandRegistration();
     }
 
     @Override
@@ -29,9 +30,12 @@ public final class Main extends JavaPlugin {
     }
 
     private void commandRegistration() {
-        // getCommand("/date").setExecutor(new DateCommand());
-        PluginCommand pluginCommand = getCommand("date");
+        PluginCommand dateCommand = getCommand("date");
         DateCommand newDateCommand = new DateCommand();
-        pluginCommand.setExecutor(newDateCommand);
+        dateCommand.setExecutor(newDateCommand);
+
+        PluginCommand blueplayCommand = getCommand("blueplay");
+        BlueplayCommand newBlueplayCommand = new BlueplayCommand();
+        blueplayCommand.setExecutor(newBlueplayCommand);
     }
 }

@@ -1,5 +1,7 @@
 package de.prentl.firsttestproject.listener;
 
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -12,5 +14,8 @@ public class JoinListener implements Listener {
         Player player = event.getPlayer();
         player.sendMessage("hi");
         event.setJoinMessage("ein neuer Spieler");
+        World world = player.getWorld();
+        Location location = new Location(world,1.5,4,77.45);
+        player.teleport(location);
     }
 }

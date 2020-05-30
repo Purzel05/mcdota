@@ -8,3 +8,6 @@ description: n/a
 commands:
   date:
     description: Zeigt das Datum an
+  blueplay:
+    description: Spiel im Blauen Team
+
