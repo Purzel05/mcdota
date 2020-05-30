@@ -2,6 +2,7 @@ package de.prentl.firsttestproject;
 
 import de.prentl.firsttestproject.commands.BlueplayCommand;
 import de.prentl.firsttestproject.commands.DateCommand;
+import de.prentl.firsttestproject.commands.YellowPlayCommand;
 import de.prentl.firsttestproject.listener.JoinListener;
 import de.prentl.firsttestproject.listener.QuitListener;
 import org.bukkit.Bukkit;
@@ -34,8 +35,13 @@ public final class Main extends JavaPlugin {
         DateCommand newDateCommand = new DateCommand();
         dateCommand.setExecutor(newDateCommand);
 
+
         PluginCommand blueplayCommand = getCommand("blueplay");
         BlueplayCommand newBlueplayCommand = new BlueplayCommand();
         blueplayCommand.setExecutor(newBlueplayCommand);
+
+        PluginCommand yellowplayCommand = getCommand("yellowplay");
+        YellowPlayCommand newYellowplayCommand = new YellowPlayCommand();
+        yellowplayCommand.setExecutor(newYellowplayCommand);
     }
 }

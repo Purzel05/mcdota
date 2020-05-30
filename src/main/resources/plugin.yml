@@ -10,4 +10,6 @@ commands:
     description: Zeigt das Datum an
   blueplay:
     description: Spiel im Blauen Team
+  yellowplay:
+    description: Spiel im Gelben Team
 
