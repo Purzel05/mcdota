@@ -14,7 +14,7 @@ public final class Main extends JavaPlugin {
     public void onEnable() {
         Bukkit.getLogger().fine("Plugin wird aktiviert.");
         listenerRegistration();
-        commandRegistration();
+        //commandRegistration();
     }
 
     @Override
