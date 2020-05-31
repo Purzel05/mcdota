@@ -10,6 +10,6 @@ public class QuitListener implements Listener
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
-        event.setQuitMessage("ciao");
+        event.setQuitMessage("Tschau!");
     }
 }

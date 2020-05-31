@@ -12,8 +12,8 @@ public class JoinListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        player.sendMessage("hi");
-        event.setJoinMessage("ein neuer Spieler");
+        player.sendMessage("Willkommen zurück!");
+        event.setJoinMessage("");
         World world = player.getWorld();
         Location location = new Location(world,1.5,4,77.45);
         player.teleport(location);
