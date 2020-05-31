@@ -1,5 +1,6 @@
 package de.prentl.firsttestproject.listener;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -12,8 +13,8 @@ public class JoinListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        player.sendMessage("Willkommen zurück!");
-        event.setJoinMessage("");
+        player.sendMessage(ChatColor.GREEN + "Willkommen auf MCDota!");
+        event.setJoinMessage(ChatColor.YELLOW + player.getName() + ChatColor.BLUE + " hat den Server betreten");
         World world = player.getWorld();
         Location location = new Location(world,1.5,4,77.45);
         player.teleport(location);
