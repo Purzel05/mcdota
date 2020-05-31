@@ -44,4 +44,5 @@ public final class Main extends JavaPlugin {
         YellowPlayCommand newYellowplayCommand = new YellowPlayCommand();
         yellowplayCommand.setExecutor(newYellowplayCommand);
     }
+    //Hallo
 }
