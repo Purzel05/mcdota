@@ -12,4 +12,6 @@ commands:
     description: Spiel im Blauen Team
   yellowplay:
     description: Spiel im Gelben Team
+  lobby:
+    description: Teleport zur Lobby
 

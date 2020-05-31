@@ -13,7 +13,6 @@ import java.util.Date;
 public class YellowPlayCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        sender.sendMessage("Dieser Command wurde gesendet von: " + sender.getName());
         Player player = Bukkit.getPlayer(sender.getName());
         World world = player.getWorld();
         Location location = new Location(world,48.5,4,-48.5);
