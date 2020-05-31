@@ -1,5 +1,5 @@
 name: mcdota
-version: ${project.version}
+version: 1.0-SNAPSHOT
 main: de.prentl.firsttestproject.Main
 api-version: 1.13
 authors: [Leo, Papa]
