@@ -4,6 +4,7 @@ import de.prentl.firsttestproject.commands.BlueplayCommand;
 import de.prentl.firsttestproject.commands.DateCommand;
 import de.prentl.firsttestproject.commands.LobbyCommand;
 import de.prentl.firsttestproject.commands.YellowPlayCommand;
+import de.prentl.firsttestproject.listener.ChatListener;
 import de.prentl.firsttestproject.listener.JoinListener;
 import de.prentl.firsttestproject.listener.QuitListener;
 import org.bukkit.Bukkit;
@@ -29,6 +30,7 @@ public final class Main extends JavaPlugin {
         PluginManager pluginManager = Bukkit.getPluginManager();
         pluginManager.registerEvents(new JoinListener(), this);
         pluginManager.registerEvents(new QuitListener(), this);
+        pluginManager.registerEvents(new ChatListener(), this);
     }
 
     private void commandRegistration() {
@@ -49,4 +51,13 @@ public final class Main extends JavaPlugin {
         LobbyCommand newLobbyCommand = new LobbyCommand();
         lobbyCommand.setExecutor(newLobbyCommand);
     }
+
+
+
+
+
+
+
+
+
 }
