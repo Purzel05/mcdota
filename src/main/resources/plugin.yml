@@ -1,6 +1,6 @@
 name: mcdota
 version: ${project.version}
-main: de.prentl.firsttestproject.Main
+main: de.prentl.firsttestproject.McDotaMain
 api-version: 1.13
 authors: [Leo, Papa]
 description: n/a
@@ -14,4 +14,6 @@ commands:
     description: Spiel im Gelben Team
   lobby:
     description: Teleport zur Lobby
+  mirror:
+    description: Die Spielfeldhälfte spiegeln
 

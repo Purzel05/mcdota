@@ -1,9 +1,6 @@
 package de.prentl.firsttestproject;
 
-import de.prentl.firsttestproject.commands.BlueplayCommand;
-import de.prentl.firsttestproject.commands.DateCommand;
-import de.prentl.firsttestproject.commands.LobbyCommand;
-import de.prentl.firsttestproject.commands.YellowPlayCommand;
+import de.prentl.firsttestproject.commands.*;
 import de.prentl.firsttestproject.listener.ChatListener;
 import de.prentl.firsttestproject.listener.JoinListener;
 import de.prentl.firsttestproject.listener.QuitListener;
@@ -12,7 +9,7 @@ import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class Main extends JavaPlugin {
+public final class McDotaMain extends JavaPlugin {
 
     @Override
     public void onEnable() {
@@ -50,6 +47,10 @@ public final class Main extends JavaPlugin {
         PluginCommand lobbyCommand = getCommand("lobby");
         LobbyCommand newLobbyCommand = new LobbyCommand();
         lobbyCommand.setExecutor(newLobbyCommand);
+
+        PluginCommand fieldMirrorCommand = getCommand("mirror");
+        MirrorCommandExecutor mirrorCommandExecutor = new MirrorCommandExecutor();
+        fieldMirrorCommand.setExecutor(mirrorCommandExecutor);
     }
 
 
