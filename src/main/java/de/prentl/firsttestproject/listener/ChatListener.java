@@ -1,22 +1,14 @@
 package de.prentl.firsttestproject.listener;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.plugin.java.JavaPlugin;
 
-public class ChatListener extends JavaPlugin implements Listener {
-
-    @Override
-    public void onEnable(){
-        Bukkit.getPluginManager().registerEvents(this, this);
-    }
+public class ChatListener implements Listener {
 
     @EventHandler
     public void onChat(final AsyncPlayerChatEvent event){
-
         final Player player = event.getPlayer();
         final String message = event.getMessage().replace("%", "%%");
 
@@ -37,11 +29,10 @@ public class ChatListener extends JavaPlugin implements Listener {
             event.setFormat("§e[§eBuilder§e] §e" + player.getName() + "§c >> §1" + message);
             return;
         }
+
         if(player.hasPermission("server.Kröte")){
             event.setFormat("§d[§dKröte§d] §d" + player.getName() + "§f >> §9" + message);
         }
-
-
     }
 }
 
