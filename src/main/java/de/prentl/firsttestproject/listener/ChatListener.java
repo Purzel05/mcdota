@@ -20,6 +20,7 @@ public class ChatListener extends JavaPlugin implements Listener {
         final Player player = event.getPlayer();
         final String message = event.getMessage().replace("%", "%%");
 
+
         if(player.hasPermission("server.Default")){
             event.setFormat("§8[§8Default§8] §8" + player.getName() + "§8 >> §f" + message);
             return;
@@ -34,7 +35,12 @@ public class ChatListener extends JavaPlugin implements Listener {
         }
         if(player.hasPermission("server.Builder")){
             event.setFormat("§e[§eBuilder§e] §e" + player.getName() + "§c >> §1" + message);
+            return;
         }
+        if(player.hasPermission("server.Kröte")){
+            event.setFormat("§d[§dKröte§d] §d" + player.getName() + "§f >> §9" + message);
+        }
+
 
     }
 }
