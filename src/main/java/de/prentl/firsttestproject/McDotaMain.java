@@ -37,22 +37,10 @@ public final class McDotaMain extends JavaPlugin {
     }
 
     private void commandRegistration() {
-        PluginCommand dateCommand = getCommand("date");
-        DateCommand newDateCommand = new DateCommand();
-        dateCommand.setExecutor(newDateCommand);
-
-        PluginCommand blueplayCommand = getCommand("blueplay");
-        BlueplayCommand newBlueplayCommand = new BlueplayCommand();
-        blueplayCommand.setExecutor(newBlueplayCommand);
-
-        PluginCommand yellowplayCommand = getCommand("yellowplay");
-        YellowPlayCommand newYellowplayCommand = new YellowPlayCommand();
-        yellowplayCommand.setExecutor(newYellowplayCommand);
-
-        PluginCommand lobbyCommand = getCommand("lobby");
-        LobbyCommand newLobbyCommand = new LobbyCommand();
-        lobbyCommand.setExecutor(newLobbyCommand);
-
+        registerCommand("date", new DateCommand());
+        registerCommand("blueplay", new BlueplayCommand());
+        registerCommand("yellowplay", new YellowPlayCommand());
+        registerCommand("lobby", new LobbyCommand());
         registerCommand("mirror", new MirrorCommandExecutor());
         registerCommand("villagers", new SpawnVillagersExecutor());
         registerCommand("witch", new SpawnWitchExecutor());
@@ -60,7 +48,6 @@ public final class McDotaMain extends JavaPlugin {
         registerCommand("ai", new WitchAiExecutor());
         registerCommand("attack", new WitchAttackExecutor());
         registerCommand("teleport", new TeleportWitchExecutor());
-
     }
 
     private void registerCommand(String commandString, CommandExecutor commandExecutor) {
