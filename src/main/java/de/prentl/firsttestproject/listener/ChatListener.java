@@ -12,7 +12,6 @@ public class ChatListener implements Listener {
         final Player player = event.getPlayer();
         final String message = event.getMessage().replace("%", "%%");
 
-
         if(player.hasPermission("server.Default")){
             event.setFormat("§8[§8Default§8] §8" + player.getName() + "§8 >> §f" + message);
             return;
