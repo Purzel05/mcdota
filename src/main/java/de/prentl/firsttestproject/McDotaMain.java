@@ -37,10 +37,10 @@ public final class McDotaMain extends JavaPlugin {
     }
 
     private void commandRegistration() {
-        registerCommand("date", new DateCommand());
-        registerCommand("blueplay", new BlueplayCommand());
-        registerCommand("yellowplay", new YellowPlayCommand());
-        registerCommand("lobby", new LobbyCommand());
+        registerCommand("date", new DateCommandExecutor());
+        registerCommand("blueplay", new BluePlayCommandExecutor());
+        registerCommand("yellowplay", new YellowPlayCommandExecutor());
+        registerCommand("lobby", new LobbyCommandExecutor());
         registerCommand("mirror", new MirrorCommandExecutor());
         registerCommand("villagers", new SpawnVillagersExecutor());
         registerCommand("witch", new SpawnWitchExecutor());
