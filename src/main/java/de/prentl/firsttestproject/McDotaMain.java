@@ -10,15 +10,11 @@ import net.minecraft.server.v1_15_R1.EntityTypes;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
-import org.bukkit.entity.Villager;
-import org.bukkit.entity.Witch;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class McDotaMain extends JavaPlugin {
 
-    public static Villager villager1 = null;
-    public static Witch witch = null;
     public static CustomEntityType<CustomZombie> zombie = null;
 
     @Override
@@ -52,14 +48,10 @@ public final class McDotaMain extends JavaPlugin {
         registerCommand("yellowplay", new YellowPlayCommand());
         registerCommand("lobby", new LobbyCommand());
         registerCommand("mirror", new MirrorCommandExecutor());
-        registerCommand("villagers", new SpawnVillagersExecutor());
-        registerCommand("witch", new SpawnWitchExecutor());
+        registerCommand("villager", new SpawnVillagerExecutor());
         registerCommand("move", new MoveWitchExecutor());
-        registerCommand("ai", new WitchAiExecutor());
         registerCommand("attack", new WitchAttackExecutor());
-        registerCommand("teleport", new TeleportWitchExecutor());
         registerCommand("zombie", new SpawnZombieExecutor());
-        registerCommand("step2", new Step2());
     }
 
     private void registerCommand(String commandString, CommandExecutor commandExecutor) {
