@@ -16,11 +16,5 @@ commands:
     description: Teleport zur Lobby
   mirror:
     description: Die Spielfeldhälfte spiegeln
-  villager:
-    description: Einen Villager spawnen
-  move:
-    description: Die Witch moven
-  attack:
-    description: Die Witch attacked den Villager
   zombie:
     description: Den Custom Zombie spawnen

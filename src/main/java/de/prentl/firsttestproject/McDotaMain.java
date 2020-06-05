@@ -48,9 +48,6 @@ public final class McDotaMain extends JavaPlugin {
         registerCommand("yellowplay", new YellowPlayCommand());
         registerCommand("lobby", new LobbyCommand());
         registerCommand("mirror", new MirrorCommandExecutor());
-        registerCommand("villager", new SpawnVillagerExecutor());
-        registerCommand("move", new MoveWitchExecutor());
-        registerCommand("attack", new WitchAttackExecutor());
         registerCommand("zombie", new SpawnZombieExecutor());
     }
 
