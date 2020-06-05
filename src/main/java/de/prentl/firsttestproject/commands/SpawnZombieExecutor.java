@@ -1,30 +1,24 @@
 package de.prentl.firsttestproject.commands;
 
-import de.prentl.firsttestproject.McDotaMain;
+import de.prentl.firsttestproject.customentities.CustomZombie;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Witch;
 
 public class SpawnZombieExecutor implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         World world = Bukkit.getWorld("world");
+        //EntityTypes.spawnEntity(new CustomZombie(world), new Location(Bukkit.getWorld("world"), 8, 4, 8));
 
-        Location location = new Location(world, 8, 4, 8);
-
-
-        //McDotaMain.zombie = world.spawnEntity()
-
+        //CustomZombie customZombie = new CustomZombie(world);
+        //Location location = new Location(world, 8, 4, 8);
 
 
 
-        McDotaMain.witch = (Witch) world.spawnEntity(location, EntityType.WITCH);
-        McDotaMain.witch.setAI(true);
 
         return false;
     }
