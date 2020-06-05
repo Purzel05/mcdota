@@ -1,6 +1,7 @@
 package de.prentl.firsttestproject;
 
 import de.prentl.firsttestproject.commands.*;
+import de.prentl.firsttestproject.customentities.CustomZombie;
 import de.prentl.firsttestproject.listener.ChatListener;
 import de.prentl.firsttestproject.listener.JoinListener;
 import de.prentl.firsttestproject.listener.QuitListener;
@@ -16,6 +17,7 @@ public final class McDotaMain extends JavaPlugin {
 
     public static Villager villager1 = null;
     public static Witch witch = null;
+    public static CustomZombie zombie = null;
 
     @Override
     public void onEnable() {
@@ -48,6 +50,7 @@ public final class McDotaMain extends JavaPlugin {
         registerCommand("ai", new WitchAiExecutor());
         registerCommand("attack", new WitchAttackExecutor());
         registerCommand("teleport", new TeleportWitchExecutor());
+        registerCommand("zombie", new SpawnZombieExecutor());
     }
 
     private void registerCommand(String commandString, CommandExecutor commandExecutor) {
