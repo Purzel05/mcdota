@@ -1,23 +1,27 @@
 package de.prentl.firsttestproject;
 
 import de.prentl.firsttestproject.commands.*;
+import de.prentl.firsttestproject.customentities.CustomEntityType;
 import de.prentl.firsttestproject.customentities.CustomZombie;
 import de.prentl.firsttestproject.listener.ChatListener;
 import de.prentl.firsttestproject.listener.JoinListener;
 import de.prentl.firsttestproject.listener.QuitListener;
+import net.minecraft.server.v1_15_R1.EntityTypes;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
-import org.bukkit.entity.Villager;
-import org.bukkit.entity.Witch;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class McDotaMain extends JavaPlugin {
 
-    public static Villager villager1 = null;
-    public static Witch witch = null;
-    public static CustomZombie zombie = null;
+    public static CustomEntityType<CustomZombie> zombie = null;
+
+    @Override
+    public void onLoad() {
+        super.onLoad();
+        entityRegistration();
+    }
 
     @Override
     public void onEnable() {
@@ -44,17 +48,17 @@ public final class McDotaMain extends JavaPlugin {
         registerCommand("yellowplay", new YellowPlayCommandExecutor());
         registerCommand("lobby", new LobbyCommandExecutor());
         registerCommand("mirror", new MirrorCommandExecutor());
-        registerCommand("villagers", new SpawnVillagersExecutor());
-        registerCommand("witch", new SpawnWitchExecutor());
-        registerCommand("move", new MoveWitchExecutor());
-        registerCommand("ai", new WitchAiExecutor());
-        registerCommand("attack", new WitchAttackExecutor());
-        registerCommand("teleport", new TeleportWitchExecutor());
         registerCommand("zombie", new SpawnZombieExecutor());
     }
 
     private void registerCommand(String commandString, CommandExecutor commandExecutor) {
         PluginCommand command = getCommand(commandString);
         command.setExecutor(commandExecutor);
+    }
+
+    private void entityRegistration() {
+        McDotaMain.zombie = new CustomEntityType <CustomZombie>
+                ("customzombie", CustomZombie.class, EntityTypes.ZOMBIE, CustomZombie::new);
+        McDotaMain.zombie.register();
     }
 }
