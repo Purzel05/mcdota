@@ -14,7 +14,7 @@ public class BluePlayCommandExecutor implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Player player = Bukkit.getPlayer(sender.getName());
-        World world = player.getWorld();
+        World world = Bukkit.getWorld("world");;
         Location location = new Location(world,-48.5,4,48.5);
         player.teleport(location);
         return false;

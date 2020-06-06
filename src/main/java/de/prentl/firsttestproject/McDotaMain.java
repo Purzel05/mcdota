@@ -49,6 +49,7 @@ public final class McDotaMain extends JavaPlugin {
         registerCommand("lobby", new LobbyCommandExecutor());
         registerCommand("mirror", new MirrorCommandExecutor());
         registerCommand("zombie", new SpawnZombieExecutor());
+        registerCommand("world", new WorldCommandExecutor());
     }
 
     private void registerCommand(String commandString, CommandExecutor commandExecutor) {
