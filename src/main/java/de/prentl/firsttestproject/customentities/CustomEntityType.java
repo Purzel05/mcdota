@@ -14,7 +14,10 @@ import java.util.Map;
 
 public class CustomEntityType<T extends EntityLiving> {
 
-    @Nullable
+    public static CustomEntityType<BlueLeftZombie> blueLeftZombieType;
+    public static CustomEntityType<BlueCenterZombie> blueCenterZombieType;
+    public static CustomEntityType<BlueRightZombie> blueRightZombieType;
+
     private static Field REGISTRY_MAT_MAP;
 
     static {
@@ -42,12 +45,10 @@ public class CustomEntityType<T extends EntityLiving> {
     }
 
     public T spawn(Location loc) {
-        T entity = entityType.spawnCreature(((CraftWorld)loc.getWorld()).getHandle(),
+        return entityType.spawnCreature(((CraftWorld)loc.getWorld()).getHandle(),
                 null, null, null,
                 new BlockPosition(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ()),
                 EnumMobSpawn.EVENT, true, false, CreatureSpawnEvent.SpawnReason.CUSTOM);
-
-        return entity;
     }
 
     public void register() throws IllegalStateException {
@@ -66,31 +67,5 @@ public class CustomEntityType<T extends EntityLiving> {
         entityType = a.a(key.getKey());
         IRegistry.a(IRegistry.ENTITY_TYPE, key.getKey(), entityType);
         registered = true;
-    }
-
-    public void unregister() throws IllegalStateException {
-        if (!registered) {
-            throw new IllegalArgumentException(String.format
-                    ("Entity with key '%s' could not be unregistered, as it is not in the registry", key));
-        }
-        // Remove custom entity from data fixers map
-        Map<Object, Type<?>> dataTypes = (Map<Object, Type<?>>)DataConverterRegistry.a()
-                .getSchema(DataFixUtils.makeKey(SharedConstants.getGameVersion().getWorldVersion()))
-                .findChoiceType(DataConverterTypes.ENTITY_TREE).types();
-        dataTypes.remove(key.toString());
-        try {
-            // Remove our custom entity from entity registry map, which takes a little reflection in 1.15
-            if (REGISTRY_MAT_MAP == null) {
-                throw new ReflectiveOperationException("Field not initially found");
-            }
-            REGISTRY_MAT_MAP.setAccessible(true);
-            Object o = REGISTRY_MAT_MAP.get(IRegistry.ENTITY_TYPE);
-            ((BiMap<MinecraftKey, ?>)o).remove(key);
-            REGISTRY_MAT_MAP.set(IRegistry.ENTITY_TYPE, o);
-            REGISTRY_MAT_MAP.setAccessible(false);
-            registered = false;
-        } catch (ReflectiveOperationException err) {
-            err.printStackTrace();
-        }
     }
 }

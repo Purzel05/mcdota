@@ -1,9 +1,7 @@
 package de.prentl.firsttestproject;
 
 import de.prentl.firsttestproject.commands.*;
-import de.prentl.firsttestproject.customentities.CustomEntityType;
-import de.prentl.firsttestproject.customentities.CustomVillager;
-import de.prentl.firsttestproject.customentities.CustomZombie;
+import de.prentl.firsttestproject.customentities.*;
 import de.prentl.firsttestproject.listener.ChatListener;
 import de.prentl.firsttestproject.listener.JoinListener;
 import de.prentl.firsttestproject.listener.QuitListener;
@@ -21,13 +19,6 @@ import java.util.List;
 public final class McDotaMain extends JavaPlugin {
 
     public static final String MAP_WORLD = "world";
-
-    public static final Double[] spawnLocBlueLeft = new Double[] {12.0D, 4.0D, 8.0D};
-    public static final Double[] spawnLocBlueCenter = new Double[] {12.0D, 4.0D, 12.0D};
-    public static final Double[] spawnLocBlueRight = new Double[] {8.0D, 4.0D, 12.0D};
-
-    public static CustomEntityType<CustomZombie> zombieType;
-    public static CustomEntityType<CustomVillager> villagerType;
 
     public static List<CustomZombie> zombies = new ArrayList<>();
 
@@ -79,14 +70,17 @@ public final class McDotaMain extends JavaPlugin {
     }
 
     private void entityRegistration() {
-        McDotaMain.zombieType = new CustomEntityType <CustomZombie>
-                ("customzombie", CustomZombie.class, EntityTypes.ZOMBIE, CustomZombie::new);
-        McDotaMain.zombieType.register();
+        CustomEntityType.blueLeftZombieType = new CustomEntityType <BlueLeftZombie>
+                ("blueleftzombie", BlueLeftZombie.class, EntityTypes.ZOMBIE, BlueLeftZombie::new);
+        CustomEntityType.blueLeftZombieType.register();
 
+        CustomEntityType.blueCenterZombieType = new CustomEntityType <BlueCenterZombie>
+                ("bluecenterzombie", BlueCenterZombie.class, EntityTypes.ZOMBIE, BlueCenterZombie::new);
+        CustomEntityType.blueCenterZombieType.register();
 
-        McDotaMain.villagerType = new CustomEntityType <CustomVillager>
-                ("customvillager", CustomVillager.class, EntityTypes.VILLAGER, CustomVillager::new);
-        McDotaMain.villagerType.register();
+        CustomEntityType.blueRightZombieType = new CustomEntityType <BlueRightZombie>
+                ("bluerightzombie", BlueRightZombie.class, EntityTypes.ZOMBIE, BlueRightZombie::new);
+        CustomEntityType.blueRightZombieType.register();
     }
 
     private void setTimeToDusk() {
