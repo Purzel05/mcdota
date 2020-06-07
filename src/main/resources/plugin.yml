@@ -18,3 +18,5 @@ commands:
     description: Die Spielfeldhälfte spiegeln
   zombie:
     description: Den Custom Zombie spawnen
+  world:
+    description: Eine Welt erstellen

@@ -6,7 +6,7 @@ import org.bukkit.command.CommandSender;
 
 import java.util.Date;
 
-public class DateCommand implements CommandExecutor {
+public class DateCommandExecutor implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Date date = new Date();
