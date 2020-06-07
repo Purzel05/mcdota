@@ -41,12 +41,13 @@ public class CustomEntityType<T extends EntityLiving> {
         this.maker = maker;
     }
 
-    public org.bukkit.entity.Entity spawn(Location loc) {
-        Entity entity = entityType.spawnCreature(((CraftWorld)loc.getWorld()).getHandle(),
+    public T spawn(Location loc) {
+        T entity = entityType.spawnCreature(((CraftWorld)loc.getWorld()).getHandle(),
                 null, null, null,
                 new BlockPosition(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ()),
                 EnumMobSpawn.EVENT, true, false, CreatureSpawnEvent.SpawnReason.CUSTOM);
-        return entity == null ? null : entity.getBukkitEntity();
+
+        return entity;
     }
 
     public void register() throws IllegalStateException {
