@@ -1,11 +1,7 @@
 package de.prentl.firsttestproject.examples;
 
-import de.prentl.firsttestproject.customentities.CustomPathfinderGoalCopied;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.World;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Villager;
+import de.prentl.firsttestproject.customentities.McdZombiePathfinderGoal;
+import net.minecraft.server.v1_15_R1.Vec3D;
 
 public class CodeSnippets {
 
@@ -72,6 +68,5 @@ public class CodeSnippets {
         //this.targetSelector.a(3, new PathfinderGoalNearestAttackableTarget(this, EntityVillagerAbstract.class, false));
         //this.targetSelector.a(3, new PathfinderGoalNearestAttackableTarget(this, EntityIronGolem.class, true));
         //this.targetSelector.a(5, new PathfinderGoalNearestAttackableTarget(this, EntityTurtle.class, 10, true, false, EntityTurtle.bw));
-
     }
 }

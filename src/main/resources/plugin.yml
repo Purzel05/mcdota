@@ -1,7 +1,7 @@
 name: mcdota
 version: ${project.version}
 main: de.prentl.firsttestproject.McDotaMain
-api-version: 1.13
+api-version: 1.15
 authors: [Leo, Papa]
 description: n/a
 

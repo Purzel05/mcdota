@@ -37,9 +37,20 @@ public final class McDotaMain extends JavaPlugin {
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
             @Override
             public void run() {
-                setTimeToDusk();
+                World world = Bukkit.getWorld(MAP_WORLD);
+                world.setTime(13000);
             }
-        }, 60L, 1000);
+        }, 10L, 1000);
+
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
+            @Override
+            public void run() {
+                for (CustomZombie zombie: zombies) {
+                    System.out.println("number of zombies: " + zombies.size());
+                    zombie.repeatingTask();
+                }
+            }
+        }, 10L, 1000);
     }
 
     @Override
@@ -86,9 +97,9 @@ public final class McDotaMain extends JavaPlugin {
     private void setTimeToDusk() {
         System.out.println("setting time to dusk ...");
         World world = Bukkit.getWorld(MAP_WORLD);
-        long dusk = getConfig().getLong("worlds." + MAP_WORLD + ".dusk");
+        long dusk = getConfig().getLong("worlds." + MAP_WORLD + ".night");
         assert world != null;
-        world.setTime(dusk);
+        world.setTime(13000);
 
     }
 }
