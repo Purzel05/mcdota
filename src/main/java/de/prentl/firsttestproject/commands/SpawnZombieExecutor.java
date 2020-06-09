@@ -12,10 +12,14 @@ import de.prentl.firsttestproject.entities.zombies.McdZombie;
 import de.prentl.firsttestproject.entities.pigs.YellowRightPigZombie;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.inventory.ItemStack;
+
+import java.util.Objects;
 
 public class SpawnZombieExecutor implements CommandExecutor {
 
@@ -64,6 +68,13 @@ public class SpawnZombieExecutor implements CommandExecutor {
                     YellowRightPigZombie.spawnLoc.y, YellowRightPigZombie.spawnLoc.z));
             McDotaMain.zombies.add(pigZombie);
         }
+
+        assert world != null;
+        world.getLivingEntities().stream().filter(
+                livingEntity -> Objects.equals(livingEntity.getType().getEntityClass(), org.bukkit.entity.Zombie.class))
+                .forEach(livingEntity -> {
+            Objects.requireNonNull(livingEntity.getEquipment()).setHelmet(new ItemStack(Material.IRON_HELMET));
+        });
 
         return false;
     }

@@ -40,13 +40,13 @@ public final class McDotaMain extends JavaPlugin {
         listenerRegistration();
         commandRegistration();
 
-        getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
+        /*getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
             @Override
             public void run() {
                 World world = Bukkit.getWorld(MAP_WORLD);
                 world.setTime(13000);
             }
-        }, 10L, 1000);
+        }, 10L, 1000);*/
 
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
             @Override
