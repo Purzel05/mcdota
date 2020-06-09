@@ -1,10 +1,14 @@
 package de.prentl.firsttestproject;
 
 import de.prentl.firsttestproject.commands.*;
-import de.prentl.firsttestproject.customentities.*;
+import de.prentl.firsttestproject.entities.*;
+import de.prentl.firsttestproject.entities.pigs.McdPigZombie;
+import de.prentl.firsttestproject.entities.pigs.YellowRightPigZombie;
+import de.prentl.firsttestproject.entities.zombies.*;
 import de.prentl.firsttestproject.listener.ChatListener;
 import de.prentl.firsttestproject.listener.JoinListener;
 import de.prentl.firsttestproject.listener.QuitListener;
+import net.minecraft.server.v1_15_R1.EntityInsentient;
 import net.minecraft.server.v1_15_R1.EntityTypes;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -20,7 +24,7 @@ public final class McDotaMain extends JavaPlugin {
 
     public static final String MAP_WORLD = "world";
 
-    public static List<CustomZombie> zombies = new ArrayList<>();
+    public static List<EntityInsentient> zombies = new ArrayList<>();
 
     @Override
     public void onLoad() {
@@ -45,12 +49,21 @@ public final class McDotaMain extends JavaPlugin {
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
             @Override
             public void run() {
-                for (CustomZombie zombie: zombies) {
-                    System.out.println("number of zombies: " + zombies.size());
-                    zombie.repeatingTask();
+                for (EntityInsentient entity: zombies) {
+                    if (entity.isAlive()) {
+                        if (entity instanceof McdZombie) {
+                            ((McdZombie)entity).updateGoalsAndTargets();
+                        } else {
+                            ((McdPigZombie)entity).updateGoalsAndTargets();
+                        }
+
+                    } else {
+                        zombies.remove(entity);
+                        break;
+                    }
                 }
             }
-        }, 10L, 1000);
+        }, 1L, 50);
     }
 
     @Override
@@ -82,16 +95,20 @@ public final class McDotaMain extends JavaPlugin {
 
     private void entityRegistration() {
         CustomEntityType.blueLeftZombieType = new CustomEntityType <BlueLeftZombie>
-                ("blueleftzombie", BlueLeftZombie.class, EntityTypes.ZOMBIE, BlueLeftZombie::new);
+                ("blueleft", BlueLeftZombie.class, EntityTypes.ZOMBIE, BlueLeftZombie::new);
         CustomEntityType.blueLeftZombieType.register();
 
         CustomEntityType.blueCenterZombieType = new CustomEntityType <BlueCenterZombie>
-                ("bluecenterzombie", BlueCenterZombie.class, EntityTypes.ZOMBIE, BlueCenterZombie::new);
+                ("bluecenter", BlueCenterZombie.class, EntityTypes.ZOMBIE, BlueCenterZombie::new);
         CustomEntityType.blueCenterZombieType.register();
 
         CustomEntityType.blueRightZombieType = new CustomEntityType <BlueRightZombie>
-                ("bluerightzombie", BlueRightZombie.class, EntityTypes.ZOMBIE, BlueRightZombie::new);
+                ("blueright", BlueRightZombie.class, EntityTypes.ZOMBIE, BlueRightZombie::new);
         CustomEntityType.blueRightZombieType.register();
+
+        CustomEntityType.yellowRightPigZombieType = new CustomEntityType <YellowRightPigZombie>
+                ("yellowright", YellowRightPigZombie.class, EntityTypes.ZOMBIE_PIGMAN, YellowRightPigZombie::new);
+        CustomEntityType.yellowRightPigZombieType.register();
     }
 
     private void setTimeToDusk() {

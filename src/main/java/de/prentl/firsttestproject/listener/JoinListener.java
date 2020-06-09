@@ -16,7 +16,7 @@ public class JoinListener implements Listener {
         player.sendMessage(ChatColor.GREEN + "Willkommen auf MCDota!");
         event.setJoinMessage(ChatColor.YELLOW + player.getName() + ChatColor.BLUE + " hat den Server betreten");
         World world = player.getWorld();
-        Location location = new Location(world,1.5,4,77.45);
+        Location location = new Location(world,40,4,20);
         player.teleport(location);
     }
 }

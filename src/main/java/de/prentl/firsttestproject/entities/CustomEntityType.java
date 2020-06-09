@@ -1,14 +1,16 @@
-package de.prentl.firsttestproject.customentities;
+package de.prentl.firsttestproject.entities;
 
-import com.google.common.collect.BiMap;
 import com.mojang.datafixers.DataFixUtils;
 import com.mojang.datafixers.types.Type;
+import de.prentl.firsttestproject.entities.zombies.BlueCenterZombie;
+import de.prentl.firsttestproject.entities.zombies.BlueLeftZombie;
+import de.prentl.firsttestproject.entities.zombies.BlueRightZombie;
+import de.prentl.firsttestproject.entities.pigs.YellowRightPigZombie;
 import net.minecraft.server.v1_15_R1.*;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_15_R1.CraftWorld;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 
-import javax.annotation.Nullable;
 import java.lang.reflect.Field;
 import java.util.Map;
 
@@ -17,6 +19,10 @@ public class CustomEntityType<T extends EntityLiving> {
     public static CustomEntityType<BlueLeftZombie> blueLeftZombieType;
     public static CustomEntityType<BlueCenterZombie> blueCenterZombieType;
     public static CustomEntityType<BlueRightZombie> blueRightZombieType;
+
+    //public static CustomEntityType<BlueLeftZombie> blueLeftZombieType;
+    //public static CustomEntityType<BlueCenterZombie> blueCenterZombieType;
+    public static CustomEntityType<YellowRightPigZombie> yellowRightPigZombieType;
 
     private static Field REGISTRY_MAT_MAP;
 

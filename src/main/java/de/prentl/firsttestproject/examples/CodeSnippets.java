@@ -1,8 +1,5 @@
 package de.prentl.firsttestproject.examples;
 
-import de.prentl.firsttestproject.customentities.McdZombiePathfinderGoal;
-import net.minecraft.server.v1_15_R1.Vec3D;
-
 public class CodeSnippets {
 
     public static void codeSnippets() {
