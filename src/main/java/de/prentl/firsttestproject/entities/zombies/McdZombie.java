@@ -43,7 +43,6 @@ public abstract class McdZombie extends EntityZombie {
         }
 
         if (nextLoc == getLaneLocation() && EntityUtils.isNearLocation(this, getLaneLocation())) {
-            System.out.println("nextLoc is now finalLoc");
             nextLoc = getFinalLocation();
             this.goalSelector.c().forEach(PathfinderGoalWrapped::d);
             EntityUtils.clearPathfinderGoalCollections(this);

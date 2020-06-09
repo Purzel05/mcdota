@@ -1,5 +1,8 @@
 package de.prentl.firsttestproject.examples;
 
+import org.bukkit.Bukkit;
+import org.bukkit.World;
+
 public class CodeSnippets {
 
     public static void codeSnippets() {
@@ -65,5 +68,22 @@ public class CodeSnippets {
         //this.targetSelector.a(3, new PathfinderGoalNearestAttackableTarget(this, EntityVillagerAbstract.class, false));
         //this.targetSelector.a(3, new PathfinderGoalNearestAttackableTarget(this, EntityIronGolem.class, true));
         //this.targetSelector.a(5, new PathfinderGoalNearestAttackableTarget(this, EntityTurtle.class, 10, true, false, EntityTurtle.bw));
+
+        /*getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
+            @Override
+            public void run() {
+                World world = Bukkit.getWorld(MAP_WORLD);
+                world.setTime(13000);
+            }
+        }, 10L, 1000);*/
+
+        /*private void setTimeToDusk() {
+            System.out.println("setting time to dusk ...");
+            World world = Bukkit.getWorld(MAP_WORLD);
+            long dusk = getConfig().getLong("worlds." + MAP_WORLD + ".night");
+            assert world != null;
+            world.setTime(13000);
+
+        }*/
     }
 }
