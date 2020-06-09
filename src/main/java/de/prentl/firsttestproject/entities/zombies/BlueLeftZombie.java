@@ -4,9 +4,9 @@ import net.minecraft.server.v1_15_R1.*;
 
 public class BlueLeftZombie extends McdZombie {
 
-    public static final Vec3D spawnLoc = new Vec3D(12.0D, 4.0D, 8.0D);
-    private static final Vec3D laneLoc = new Vec3D( 30.0D, 4.0D, 8.0D);
-    private static final Vec3D finalLoc = new Vec3D(60.0D, 4.0D, 8.0D);
+    public static final Vec3D spawnLoc = new Vec3D(10.0D, 4.0D, 10.0D);
+    private static final Vec3D laneLoc = new Vec3D( 80.0D, 4.0D, 10.0D);
+    private static final Vec3D finalLoc = new Vec3D(80.0D, 4.0D, 80.0D);
 
     public BlueLeftZombie(World world) { super(world); }
 

@@ -3,6 +3,8 @@ package de.prentl.firsttestproject;
 import de.prentl.firsttestproject.commands.*;
 import de.prentl.firsttestproject.entities.*;
 import de.prentl.firsttestproject.entities.pigs.McdPigZombie;
+import de.prentl.firsttestproject.entities.pigs.YellowCenterPigZombie;
+import de.prentl.firsttestproject.entities.pigs.YellowLeftPigZombie;
 import de.prentl.firsttestproject.entities.pigs.YellowRightPigZombie;
 import de.prentl.firsttestproject.entities.zombies.*;
 import de.prentl.firsttestproject.listener.ChatListener;
@@ -105,6 +107,14 @@ public final class McDotaMain extends JavaPlugin {
         CustomEntityType.blueRightZombieType = new CustomEntityType <BlueRightZombie>
                 ("blueright", BlueRightZombie.class, EntityTypes.ZOMBIE, BlueRightZombie::new);
         CustomEntityType.blueRightZombieType.register();
+
+        CustomEntityType.yellowLeftPigZombieType = new CustomEntityType <YellowLeftPigZombie>
+                ("yellowleft", YellowLeftPigZombie.class, EntityTypes.ZOMBIE_PIGMAN, YellowLeftPigZombie::new);
+        CustomEntityType.yellowLeftPigZombieType.register();
+
+        CustomEntityType.yellowCenterPigZombieType = new CustomEntityType <YellowCenterPigZombie>
+                ("yellowcenter", YellowCenterPigZombie.class, EntityTypes.ZOMBIE_PIGMAN, YellowCenterPigZombie::new);
+        CustomEntityType.yellowCenterPigZombieType.register();
 
         CustomEntityType.yellowRightPigZombieType = new CustomEntityType <YellowRightPigZombie>
                 ("yellowright", YellowRightPigZombie.class, EntityTypes.ZOMBIE_PIGMAN, YellowRightPigZombie::new);

@@ -35,6 +35,11 @@ public abstract class McdPigZombie extends EntityPigZombie {
         if (this.goalSelector.c().count() == 0) {
             if (nextLoc == null) { nextLoc = getLaneLocation(); }
             this.goalSelector.a(7, new McdPathfinderGoal(this, nextLoc));
+            this.goalSelector.a(1, new PathfinderGoalMeleeAttack(this, 1.2D, false));
+        }
+
+        if (this.targetSelector.c().count() == 0) {
+            this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(this, McdZombie.class, true));
         }
 
         if (nextLoc == getLaneLocation() && EntityUtils.isNearLocation(this, getLaneLocation())) {
@@ -43,10 +48,6 @@ public abstract class McdPigZombie extends EntityPigZombie {
             this.goalSelector.c().forEach(PathfinderGoalWrapped::d);
             EntityUtils.clearPathfinderGoalCollections(this);
             this.goalSelector.a(7, new McdPathfinderGoal(this, nextLoc));
-        }
-
-        if (this.targetSelector.c().count() == 0) {
-            this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(this, McdZombie.class, true));
         }
     }
 }
