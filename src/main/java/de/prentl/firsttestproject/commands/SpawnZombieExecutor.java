@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 public class SpawnZombieExecutor implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
+
         return false;
     }
 }

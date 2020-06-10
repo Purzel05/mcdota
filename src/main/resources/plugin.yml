@@ -14,7 +14,7 @@ commands:
     description: Spiel im Gelben Team
   lobby:
     description: Teleport zur Lobby
-  mirror:
+  mirr:
     description: Die Spielfeldhälfte spiegeln
   zombie:
     description: Den Custom Zombie spawnen

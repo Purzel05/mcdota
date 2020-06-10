@@ -4,6 +4,7 @@ import com.mojang.datafixers.DataFixUtils;
 import com.mojang.datafixers.types.Type;
 import de.prentl.firsttestproject.entities.pigs.YellowCenterPigZombie;
 import de.prentl.firsttestproject.entities.pigs.YellowLeftPigZombie;
+import de.prentl.firsttestproject.entities.skeletons.McdSkeleton;
 import de.prentl.firsttestproject.entities.zombies.BlueCenterZombie;
 import de.prentl.firsttestproject.entities.zombies.BlueLeftZombie;
 import de.prentl.firsttestproject.entities.zombies.BlueRightZombie;
@@ -25,6 +26,8 @@ public class CustomEntityType<T extends EntityLiving> {
     public static CustomEntityType<YellowLeftPigZombie> yellowLeftPigZombieType;
     public static CustomEntityType<YellowCenterPigZombie> yellowCenterPigZombieType;
     public static CustomEntityType<YellowRightPigZombie> yellowRightPigZombieType;
+
+    public static CustomEntityType<McdSkeleton> skeletonType;
 
     private static Field REGISTRY_MAT_MAP;
 
