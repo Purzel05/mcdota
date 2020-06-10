@@ -3,9 +3,6 @@ package de.prentl.firsttestproject.tasks;
 import de.prentl.firsttestproject.McDotaMain;
 import de.prentl.firsttestproject.entities.CustomEntityType;
 import de.prentl.firsttestproject.entities.pigs.McdPigZombie;
-import de.prentl.firsttestproject.entities.pigs.YellowCenterPigZombie;
-import de.prentl.firsttestproject.entities.pigs.YellowLeftPigZombie;
-import de.prentl.firsttestproject.entities.pigs.YellowRightPigZombie;
 import de.prentl.firsttestproject.entities.skeletons.McdSkeleton;
 import de.prentl.firsttestproject.entities.zombies.BlueCenterZombie;
 import de.prentl.firsttestproject.entities.zombies.BlueLeftZombie;
@@ -72,20 +69,23 @@ public class SendWavesTask implements Runnable {
         McdPigZombie pigZombie;
 
         for (int i = 0; i < WAVES_SIZE; i++) {
-            pigZombie = CustomEntityType.yellowLeftPigZombieType.spawn(new Location(world, YellowLeftPigZombie.spawnLoc.x + i,
-                    YellowLeftPigZombie.spawnLoc.y, YellowLeftPigZombie.spawnLoc.z));
+            pigZombie = CustomEntityType.pigZombieType.spawn(new Location(world, McdPigZombie.yellowSpawnLocation.x + i,
+                    McdPigZombie.yellowSpawnLocation.y, McdPigZombie.yellowSpawnLocation.z));
+            pigZombie.setLaneLocation(McdPigZombie.yellowLeftLaneLocation);
             McDotaMain.insentients.add(pigZombie);
         }
 
         for (int i = 0; i < WAVES_SIZE; i++) {
-            pigZombie = CustomEntityType.yellowCenterPigZombieType.spawn(new Location(world, YellowCenterPigZombie.spawnLoc.x + i,
-                    YellowCenterPigZombie.spawnLoc.y, YellowCenterPigZombie.spawnLoc.z));
+            pigZombie = CustomEntityType.pigZombieType.spawn(new Location(world, McdPigZombie.yellowSpawnLocation.x + i,
+                    McdPigZombie.yellowSpawnLocation.y, McdPigZombie.yellowSpawnLocation.z));
+            pigZombie.setLaneLocation(McdPigZombie.yellowCenterLaneLocation);
             McDotaMain.insentients.add(pigZombie);
         }
 
         for (int i = 0; i < WAVES_SIZE; i++) {
-            pigZombie = CustomEntityType.yellowRightPigZombieType.spawn(new Location(world, YellowRightPigZombie.spawnLoc.x + i,
-                    YellowRightPigZombie.spawnLoc.y, YellowRightPigZombie.spawnLoc.z));
+            pigZombie = CustomEntityType.pigZombieType.spawn(new Location(world, McdPigZombie.yellowSpawnLocation.x + i,
+                    McdPigZombie.yellowSpawnLocation.y, McdPigZombie.yellowSpawnLocation.z));
+            pigZombie.setLaneLocation(McdPigZombie.yellowRightLaneLocation);
             McDotaMain.insentients.add(pigZombie);
         }
 

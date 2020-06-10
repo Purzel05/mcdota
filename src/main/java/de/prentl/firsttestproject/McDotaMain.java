@@ -2,9 +2,7 @@ package de.prentl.firsttestproject;
 
 import de.prentl.firsttestproject.commands.*;
 import de.prentl.firsttestproject.entities.*;
-import de.prentl.firsttestproject.entities.pigs.YellowCenterPigZombie;
-import de.prentl.firsttestproject.entities.pigs.YellowLeftPigZombie;
-import de.prentl.firsttestproject.entities.pigs.YellowRightPigZombie;
+import de.prentl.firsttestproject.entities.pigs.McdPigZombie;
 import de.prentl.firsttestproject.entities.skeletons.McdSkeleton;
 import de.prentl.firsttestproject.entities.zombies.*;
 import de.prentl.firsttestproject.listener.ChatListener;
@@ -92,17 +90,9 @@ public final class McDotaMain extends JavaPlugin {
                 ("blue_right_zombie", BlueRightZombie.class, EntityTypes.ZOMBIE, BlueRightZombie::new);
         CustomEntityType.blueRightZombieType.register();
 
-        CustomEntityType.yellowLeftPigZombieType = new CustomEntityType <YellowLeftPigZombie>
-                ("yellow_left_pig_zombie", YellowLeftPigZombie.class, EntityTypes.ZOMBIE_PIGMAN, YellowLeftPigZombie::new);
-        CustomEntityType.yellowLeftPigZombieType.register();
-
-        CustomEntityType.yellowCenterPigZombieType = new CustomEntityType <YellowCenterPigZombie>
-                ("yellow_center_pig_zombie", YellowCenterPigZombie.class, EntityTypes.ZOMBIE_PIGMAN, YellowCenterPigZombie::new);
-        CustomEntityType.yellowCenterPigZombieType.register();
-
-        CustomEntityType.yellowRightPigZombieType = new CustomEntityType <YellowRightPigZombie>
-                ("yellow_right_pig_zombie", YellowRightPigZombie.class, EntityTypes.ZOMBIE_PIGMAN, YellowRightPigZombie::new);
-        CustomEntityType.yellowRightPigZombieType.register();
+        CustomEntityType.pigZombieType = new CustomEntityType <McdPigZombie>
+                ("mcd_pig_zombie", McdPigZombie.class, EntityTypes.ZOMBIE_PIGMAN, McdPigZombie::new);
+        CustomEntityType.pigZombieType.register();
 
         CustomEntityType.skeletonType = new CustomEntityType <McdSkeleton>
                 ("mcd_skeleton", McdSkeleton.class, EntityTypes.SKELETON, McdSkeleton::new);

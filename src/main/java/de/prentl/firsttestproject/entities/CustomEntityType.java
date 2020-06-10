@@ -2,13 +2,11 @@ package de.prentl.firsttestproject.entities;
 
 import com.mojang.datafixers.DataFixUtils;
 import com.mojang.datafixers.types.Type;
-import de.prentl.firsttestproject.entities.pigs.YellowCenterPigZombie;
-import de.prentl.firsttestproject.entities.pigs.YellowLeftPigZombie;
+import de.prentl.firsttestproject.entities.pigs.McdPigZombie;
 import de.prentl.firsttestproject.entities.skeletons.McdSkeleton;
 import de.prentl.firsttestproject.entities.zombies.BlueCenterZombie;
 import de.prentl.firsttestproject.entities.zombies.BlueLeftZombie;
 import de.prentl.firsttestproject.entities.zombies.BlueRightZombie;
-import de.prentl.firsttestproject.entities.pigs.YellowRightPigZombie;
 import net.minecraft.server.v1_15_R1.*;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_15_R1.CraftWorld;
@@ -23,10 +21,7 @@ public class CustomEntityType<T extends EntityLiving> {
     public static CustomEntityType<BlueCenterZombie> blueCenterZombieType;
     public static CustomEntityType<BlueRightZombie> blueRightZombieType;
 
-    public static CustomEntityType<YellowLeftPigZombie> yellowLeftPigZombieType;
-    public static CustomEntityType<YellowCenterPigZombie> yellowCenterPigZombieType;
-    public static CustomEntityType<YellowRightPigZombie> yellowRightPigZombieType;
-
+    public static CustomEntityType<McdPigZombie> pigZombieType;
     public static CustomEntityType<McdSkeleton> skeletonType;
 
     private static Field REGISTRY_MAT_MAP;
