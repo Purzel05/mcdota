@@ -2,8 +2,6 @@ package de.prentl.firsttestproject.tasks;
 
 import de.prentl.firsttestproject.McDotaMain;
 import de.prentl.firsttestproject.entities.pigs.McdPigZombie;
-import de.prentl.firsttestproject.entities.skeletons.McdSkeleton;
-import de.prentl.firsttestproject.entities.zombies.McdZombie;
 import net.minecraft.server.v1_15_R1.EntityInsentient;
 import org.bukkit.Bukkit;
 
@@ -26,9 +24,10 @@ public class UpdateGoalsAndTargetsTask implements Runnable {
 
         for (EntityInsentient entity: insentients) {    // TODO refactor this with an interface for those classes!
             if (entity != null && entity.isAlive()) {
-                if (entity instanceof McdZombie) {
+                /*if (entity instanceof McdZombie) {
                     ((McdZombie)entity).updateGoalsAndTargets();
-                } else if (entity instanceof McdPigZombie) {
+                }*/
+                if (entity instanceof McdPigZombie) {
                     ((McdPigZombie)entity).updateGoalsAndTargets();
                 }
             } else {

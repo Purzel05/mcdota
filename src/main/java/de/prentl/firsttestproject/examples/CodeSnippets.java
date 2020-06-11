@@ -78,7 +78,6 @@ public class CodeSnippets {
         }, 10L, 1000);*/
 
         /*private void setTimeToDusk() {
-            System.out.println("setting time to dusk ...");
             World world = Bukkit.getWorld(MAP_WORLD);
             long dusk = getConfig().getLong("worlds." + MAP_WORLD + ".night");
             assert world != null;

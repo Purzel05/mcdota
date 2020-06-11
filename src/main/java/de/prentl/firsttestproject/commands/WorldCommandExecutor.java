@@ -24,8 +24,8 @@ public class WorldCommandExecutor implements CommandExecutor {
                     if(args.length == 2){
                         if(Bukkit.getWorld(args[1]) != null){
                             player.teleport(Bukkit.getWorld(args[1]).getSpawnLocation());
-                        }else{
-                            System.out.println("World ist null");
+                        } else {
+                            Bukkit.getLogger().warning("World ist null");
                         }
                     }
 

@@ -4,7 +4,6 @@ import de.prentl.firsttestproject.commands.*;
 import de.prentl.firsttestproject.entities.*;
 import de.prentl.firsttestproject.entities.pigs.McdPigZombie;
 import de.prentl.firsttestproject.entities.skeletons.McdSkeleton;
-import de.prentl.firsttestproject.entities.zombies.*;
 import de.prentl.firsttestproject.listener.ChatListener;
 import de.prentl.firsttestproject.listener.JoinListener;
 import de.prentl.firsttestproject.listener.WeatherChangeListener;
@@ -78,7 +77,7 @@ public final class McDotaMain extends JavaPlugin {
     }
 
     private void entityRegistration() {
-        CustomEntityType.blueLeftZombieType = new CustomEntityType <BlueLeftZombie>
+        /*CustomEntityType.blueLeftZombieType = new CustomEntityType <BlueLeftZombie>
                 ("blue_left_zombie", BlueLeftZombie.class, EntityTypes.ZOMBIE, BlueLeftZombie::new);
         CustomEntityType.blueLeftZombieType.register();
 
@@ -88,7 +87,7 @@ public final class McDotaMain extends JavaPlugin {
 
         CustomEntityType.blueRightZombieType = new CustomEntityType <BlueRightZombie>
                 ("blue_right_zombie", BlueRightZombie.class, EntityTypes.ZOMBIE, BlueRightZombie::new);
-        CustomEntityType.blueRightZombieType.register();
+        CustomEntityType.blueRightZombieType.register();*/
 
         CustomEntityType.pigZombieType = new CustomEntityType <McdPigZombie>
                 ("mcd_pig_zombie", McdPigZombie.class, EntityTypes.ZOMBIE_PIGMAN, McdPigZombie::new);

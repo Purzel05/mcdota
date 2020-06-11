@@ -4,9 +4,6 @@ import com.mojang.datafixers.DataFixUtils;
 import com.mojang.datafixers.types.Type;
 import de.prentl.firsttestproject.entities.pigs.McdPigZombie;
 import de.prentl.firsttestproject.entities.skeletons.McdSkeleton;
-import de.prentl.firsttestproject.entities.zombies.BlueCenterZombie;
-import de.prentl.firsttestproject.entities.zombies.BlueLeftZombie;
-import de.prentl.firsttestproject.entities.zombies.BlueRightZombie;
 import net.minecraft.server.v1_15_R1.*;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_15_R1.CraftWorld;
@@ -16,11 +13,6 @@ import java.lang.reflect.Field;
 import java.util.Map;
 
 public class CustomEntityType<T extends EntityLiving> {
-
-    public static CustomEntityType<BlueLeftZombie> blueLeftZombieType;
-    public static CustomEntityType<BlueCenterZombie> blueCenterZombieType;
-    public static CustomEntityType<BlueRightZombie> blueRightZombieType;
-
     public static CustomEntityType<McdPigZombie> pigZombieType;
     public static CustomEntityType<McdSkeleton> skeletonType;
 
