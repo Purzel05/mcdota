@@ -1,7 +1,7 @@
 package de.prentl.firsttestproject.tasks;
 
-import de.prentl.firsttestproject.McDotaMain;
-import de.prentl.firsttestproject.entities.pigs.McdPigZombie;
+import de.prentl.firsttestproject.McdPlugin;
+import de.prentl.firsttestproject.entities.McdEntity;
 import net.minecraft.server.v1_15_R1.EntityInsentient;
 import org.bukkit.Bukkit;
 
@@ -18,18 +18,13 @@ public class UpdateGoalsAndTargetsTask implements Runnable {
     @Override
     public void run() {
 
-        if (Bukkit.getWorld(McDotaMain.MAP_WORLD).getTime() > 15000) {   // TODO put this in a separate Task!
-            Bukkit.getWorld(McDotaMain.MAP_WORLD).setTime(14000);
+        if (Bukkit.getWorld(McdPlugin.MAP_WORLD).getTime() > 15000) {   // TODO put this in a separate Task!
+            Bukkit.getWorld(McdPlugin.MAP_WORLD).setTime(14000);
         }
 
-        for (EntityInsentient entity: insentients) {    // TODO refactor this with an interface for those classes!
+        for (EntityInsentient entity: insentients) {
             if (entity != null && entity.isAlive()) {
-                /*if (entity instanceof McdZombie) {
-                    ((McdZombie)entity).updateGoalsAndTargets();
-                }*/
-                if (entity instanceof McdPigZombie) {
-                    ((McdPigZombie)entity).updateGoalsAndTargets();
-                }
+                ((McdEntity)entity).updateGoalsAndTargets();
             } else {
                 insentients.remove(entity);
                 break;

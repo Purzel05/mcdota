@@ -2,8 +2,6 @@ package de.prentl.firsttestproject.entities;
 
 import com.mojang.datafixers.DataFixUtils;
 import com.mojang.datafixers.types.Type;
-import de.prentl.firsttestproject.entities.pigs.McdPigZombie;
-import de.prentl.firsttestproject.entities.skeletons.McdSkeleton;
 import net.minecraft.server.v1_15_R1.*;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_15_R1.CraftWorld;

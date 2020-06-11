@@ -12,3 +12,5 @@ mcdota
 - Pigs greifen auch Skeletons an
 - Skeletons an allen 6 Positionen
 - Walk Speed für Skeletons auf Null
+- IRON vs GOLD statt BLUE vs YELLOW
+- Prüfen wie das mit den compute distances ist, damit die ganze Map computed wird

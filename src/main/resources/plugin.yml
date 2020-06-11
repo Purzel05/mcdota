@@ -16,7 +16,11 @@ commands:
     description: Teleport zur Lobby
   mirr:
     description: Die Spielfeldhälfte spiegeln
-  zombie:
-    description: Den Custom Zombie spawnen
+  wave:
+    description: Eine Wave spawnen
+  skels:
+    description: Skelette spawnen
+  killall:
+    description: Alle PigZombies und Skelette entfernen
   world:
     description: Eine Welt erstellen

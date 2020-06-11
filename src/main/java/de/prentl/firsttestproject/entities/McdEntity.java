@@ -1,8 +1,8 @@
 package de.prentl.firsttestproject.entities;
 
-import de.prentl.firsttestproject.Side;
+import de.prentl.firsttestproject.McdMap;
 
 public interface McdEntity {
-    public Side getSide();
-    public void setSide(Side side);
+    McdMap.Side getSide();
+    void updateGoalsAndTargets();
 }
