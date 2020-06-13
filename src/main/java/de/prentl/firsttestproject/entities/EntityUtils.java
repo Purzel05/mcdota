@@ -8,21 +8,21 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.craftbukkit.v1_15_R1.entity.CraftLivingEntity;
 import org.bukkit.entity.Entity;
 import org.bukkit.inventory.ItemStack;
 
 import java.lang.reflect.Field;
-import java.util.EnumMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public abstract class EntityUtils {
     public static final int WAVES_SIZE = 4;
-    public static boolean skeletonsSpawned = false;
+    private static boolean skeletonsSpawned = false;
 
     public static void  removeLivingEntities() {
+        Bukkit.getLogger().info("removing all entities");
         World world = Bukkit.getWorld(McdPlugin.MAP_WORLD);
         assert world != null;
         world.getLivingEntities().forEach(Entity::remove);
@@ -31,26 +31,38 @@ public abstract class EntityUtils {
     public static void spawnSkeletons() {
         World world = Bukkit.getWorld(McdPlugin.MAP_WORLD);
         if (!skeletonsSpawned) {
-            McdMap.Side side = McdMap.Side.BLUE;
-            McdMap.Lane lane = McdMap.Lane.CENTER;
-            McdMap.TowerLocation location = McdMap.TowerLocation.RIVER;
-
-            for (int i = 0; i < 3; i++) {
-                for (int j = 0; j < 3; j++) {
-                    Vec3D spawnVec = McdMap.getLocation(side, lane, location);
-                    assert spawnVec != null;
-                    Location spawnLocation = new Location(world, spawnVec.x + i, spawnVec.y, spawnVec.z);
-                    McdSkeleton skeleton = CustomEntityType.skeletonType.spawn(spawnLocation);
-                    if (skeleton != null) {
-                        skeleton.initialize(side, lane, location);
-                        McdPlugin.entitiesInsentient.add(skeleton);
-                    } else {
-                        Bukkit.getLogger().warning("spawned skeleton is null (chunk not loaded?)");
+            for (McdMap.Side side: McdPlugin.sides) {
+                for (McdMap.Lane lane: McdPlugin.lanes) {
+                    for (McdMap.TowerLocation location: McdPlugin.towerLocations) {
+                        List<Vec3D> vec3DList = McdMap.getLocation(side, lane, location);
+                        if (vec3DList != null) {
+                            for (Vec3D spawnVec : vec3DList) {
+                                assert spawnVec != null;
+                                Location spawnLocation = new Location(world, spawnVec.x, spawnVec.y, spawnVec.z);
+                                McdSkeleton skeleton = CustomEntityType.skeletonType.spawn(spawnLocation);
+                                if (skeleton != null) {
+                                    skeleton.initialize(side, lane, location, spawnVec);
+                                    McdPlugin.entitiesInsentient.add(skeleton);
+                                } else {
+                                    Bukkit.getLogger().warning("spawned skeleton is null (chunk not loaded?)");
+                                }
+                            }
+                        }
                     }
                 }
             }
             skeletonsSpawned = true;
         }
+
+        assert world != null;
+        world.getLivingEntities().forEach(livingEntity -> {
+            EntityLiving entityLiving = ((CraftLivingEntity)livingEntity).getHandle();
+            if (entityLiving instanceof McdSkeleton) {
+                McdSkeleton skeleton = (McdSkeleton)entityLiving;
+                Vec3D spawnLocation = skeleton.getSpawnLocation();
+                livingEntity.teleport(new Location(world, spawnLocation.x, spawnLocation.y, spawnLocation.z));
+            }
+        });
     }
 
     public static void spawnPigZombies() {
@@ -59,6 +71,7 @@ public abstract class EntityUtils {
             for (McdMap.Lane lane: McdPlugin.lanes) {
                 for (int i = 0; i < WAVES_SIZE; i++) {
                     Vec3D spawnVec = McdMap.getLocation(side, lane, McdMap.LaneLocation.SPAWN);
+                    assert spawnVec != null;
                     Location spawnLocation = new Location(world, spawnVec.x + i, spawnVec.y, spawnVec.z);
                     McdPigZombie pigZombie = CustomEntityType.pigZombieType.spawn(spawnLocation);
                     if (pigZombie != null) {
@@ -77,6 +90,7 @@ public abstract class EntityUtils {
         assert world != null;
         world.getLivingEntities().forEach(livingEntity -> {
             EntityLiving entityLiving = ((CraftLivingEntity)livingEntity).getHandle();
+
             if (entityLiving instanceof McdEntity) {
                 McdEntity mcdEntity = (McdEntity) entityLiving;
                 if (mcdEntity.getSide().equals(McdMap.Side.BLUE)) {
@@ -88,11 +102,17 @@ public abstract class EntityUtils {
                     Objects.requireNonNull(livingEntity.getEquipment()).setChestplate(new ItemStack(Material.GOLDEN_CHESTPLATE));
                 }
             }
+
+            if (entityLiving instanceof McdSkeleton) {
+                AttributeInstance movementSpeed = livingEntity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED);
+                assert movementSpeed != null;
+                movementSpeed.setBaseValue(0);
+            }
         });
     }
 
     public static void clearPathfinderGoalCollections(EntityInsentient entityInsentient) {
-        Class clazz = PathfinderGoalSelector.class;
+        Class<PathfinderGoalSelector> clazz = PathfinderGoalSelector.class;
         try {
             Map<PathfinderGoal.Type, PathfinderGoalWrapped> c = new EnumMap(PathfinderGoal.Type.class);
             Field field = clazz.getDeclaredField("c");

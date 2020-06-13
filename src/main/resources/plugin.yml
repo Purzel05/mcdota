@@ -1,6 +1,6 @@
 name: mcdota
 version: ${project.version}
-main: de.prentl.firsttestproject.McDotaMain
+main: de.prentl.firsttestproject.McdPlugin
 api-version: 1.15
 authors: [Leo, Papa]
 description: n/a
@@ -20,7 +20,11 @@ commands:
     description: Eine Wave spawnen
   skels:
     description: Skelette spawnen
-  killall:
-    description: Alle PigZombies und Skelette entfernen
+  rme:
+    description: Remove entities
   world:
     description: Eine Welt erstellen
+  sga:
+    description: Das Spiel starten
+  logl:
+    description: Das loglevel setzen

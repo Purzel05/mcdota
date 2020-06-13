@@ -12,19 +12,16 @@ import de.prentl.firsttestproject.tasks.SendWavesTask;
 import de.prentl.firsttestproject.tasks.UpdateGoalsAndTargetsTask;
 import net.minecraft.server.v1_15_R1.EntityInsentient;
 import net.minecraft.server.v1_15_R1.EntityTypes;
-import net.minecraft.server.v1_15_R1.Vec3D;
 import org.bukkit.Bukkit;
-import org.bukkit.World;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
-import org.bukkit.entity.Entity;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Objects;
+import java.util.logging.Level;
 
 public final class McdPlugin extends JavaPlugin {
 
@@ -32,6 +29,7 @@ public final class McdPlugin extends JavaPlugin {
 
     public static final List<McdMap.Side> sides = new ArrayList<>();
     public static final List<McdMap.Lane> lanes = new ArrayList<>();
+    public static final List<McdMap.TowerLocation> towerLocations = new ArrayList<>();
 
     public static List<EntityInsentient> entitiesInsentient = new ArrayList<>();
 
@@ -43,11 +41,22 @@ public final class McdPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        Bukkit.getLogger().setLevel(Level.INFO);
+
         sides.add(McdMap.Side.BLUE);
         sides.add(McdMap.Side.YELLOW);
         lanes.add(McdMap.Lane.LEFT);
         lanes.add(McdMap.Lane.CENTER);
         lanes.add(McdMap.Lane.RIGHT);
+        towerLocations.add(McdMap.TowerLocation.BASE);
+        towerLocations.add(McdMap.TowerLocation.MID);
+        towerLocations.add(McdMap.TowerLocation.RIVER);
+
+        for (int i = -2; i < 10; i++) {
+            for (int j = -2; j < 10; j++) {
+                Objects.requireNonNull(Bukkit.getWorld(MAP_WORLD)).setChunkForceLoaded(i, j, true);
+            }
+        }
 
         EntityUtils.removeLivingEntities();
         listenerRegistration();
@@ -74,10 +83,13 @@ public final class McdPlugin extends JavaPlugin {
         registerCommand("yellowplay", new YellowPlayCommandExecutor());
         registerCommand("lobby", new LobbyCommandExecutor());
         registerCommand("mirr", new MirrorCommandExecutor());
-        registerCommand("wave", new SpawnPigZombieWave());
+        registerCommand("wave", new SpawnPigZombieWaveExecutor());
         registerCommand("skels", new SpawnSkeletonsExecutor());
-        registerCommand("killall", new RemoveAllExecutor());
+        registerCommand("rme", new RemoveAllExecutorExecutor());
         registerCommand("world", new WorldCommandExecutor());
+        registerCommand("sga", new StartGameExecutor());
+        registerCommand("logl", new SetLogLevelExecutor());
+
     }
 
     private void registerCommand(String commandString, CommandExecutor commandExecutor) {

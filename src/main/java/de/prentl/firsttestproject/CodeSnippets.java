@@ -1,10 +1,15 @@
 package de.prentl.firsttestproject;
 
+import net.minecraft.server.v1_15_R1.EntityLiving;
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.World;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.craftbukkit.v1_15_R1.CraftServer;
 import org.bukkit.craftbukkit.v1_15_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_15_R1.attribute.CraftAttributeMap;
+import org.bukkit.craftbukkit.v1_15_R1.entity.CraftLivingEntity;
 
 public class CodeSnippets {
 
@@ -25,6 +30,11 @@ public class CodeSnippets {
     }
 
     public static void codeSnippets() {
+        //CraftLivingEntity craftLivingEntity = (CraftLivingEntity)livingEntity;
+        //EntityLiving entityLiving1 = craftLivingEntity.getHandle();
+        //CraftAttributeMap craftAttributeMap = entityLiving1.craftAttributes;
+        //AttributeInstance attributeInstance = craftAttributeMap.getAttribute(Attribute.GENERIC_ATTACK_SPEED);
+
         //e.getEntity().getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(8.0D);
 
         //World world = Bukkit.getWorld("world");

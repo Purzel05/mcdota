@@ -6,7 +6,6 @@ import net.minecraft.server.v1_15_R1.*;
 public class McdSkeleton extends EntitySkeleton implements McdEntity {
 
     private McdMap.Side side;
-
     private Vec3D spawnLocation;
 
     public McdSkeleton(World world) {
@@ -16,7 +15,6 @@ public class McdSkeleton extends EntitySkeleton implements McdEntity {
     public McdSkeleton(EntityTypes<McdSkeleton> entityTypes, World world) {
         this(world);
     }
-
 
     @Override
     protected void initPathfinder() {
@@ -29,8 +27,10 @@ public class McdSkeleton extends EntitySkeleton implements McdEntity {
         }
 
         if (this.goalSelector.c().count() == 0) {
+            this.goalSelector.c().forEach(PathfinderGoalWrapped::d);
+            EntityUtils.clearPathfinderGoalCollections(this);
+            this.goalSelector.a(0, new McdPathfinderGoalBowShoot(this, 1.0D, 1, 15.0F ));
             this.goalSelector.a(7, new McdPathfinderGoal(this, spawnLocation));
-
             if (this.getSide().equals(McdMap.Side.BLUE)) {
                 this.targetSelector.a(1, new McdPathfinderGoalTarget(this,
                         McdPigZombie.class, 10, true, false, McdSkeleton::targetConditionIsYellow));
@@ -58,12 +58,17 @@ public class McdSkeleton extends EntitySkeleton implements McdEntity {
         }
     }
 
-    public void initialize(McdMap.Side side, McdMap.Lane lane, McdMap.TowerLocation location) {
+    public void initialize(McdMap.Side side, McdMap.Lane lane, McdMap.TowerLocation location, Vec3D spawnLocation) {
+        this.setPersistent();
         this.side = side;
-        this.spawnLocation = McdMap.getLocation(side, lane, location);
+        this.spawnLocation = spawnLocation;
     }
 
     public McdMap.Side getSide() {
         return side;
+    }
+
+    public Vec3D getSpawnLocation() {
+        return spawnLocation;
     }
 }

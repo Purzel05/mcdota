@@ -2,7 +2,6 @@ package de.prentl.firsttestproject.entities;
 
 import de.prentl.firsttestproject.McdMap;
 import net.minecraft.server.v1_15_R1.*;
-import org.bukkit.Bukkit;
 
 public class McdPigZombie extends EntityPigZombie implements McdEntity {
     private McdMap.Side side;
@@ -34,26 +33,25 @@ public class McdPigZombie extends EntityPigZombie implements McdEntity {
             return;
         }
 
-        Bukkit.getLogger().info(this + ": updateGoalsAndTargets ...");
-
         if (this.goalSelector.c().count() == 0) {
-            Bukkit.getLogger().info(this + ": initializing goals and targets ...");
-
             this.goalSelector.a(1, new PathfinderGoalMeleeAttack(this, 1.2D, false));
             this.goalSelector.a(7, new McdPathfinderGoal(this, goalLocation));
 
             if (this.getSide().equals(McdMap.Side.BLUE)) {
                 this.targetSelector.a(1, new McdPathfinderGoalTarget(this,
                         McdPigZombie.class, 10, true, false, McdPigZombie::targetConditionIsYellow));
+                this.targetSelector.a(2, new McdPathfinderGoalTarget(this,
+                        McdSkeleton.class, 10, true, false, McdPigZombie::targetConditionIsYellow));
             }
             if (this.getSide().equals(McdMap.Side.YELLOW)) {
                 this.targetSelector.a(1, new McdPathfinderGoalTarget(this,
                         McdPigZombie.class, 10, true, false, McdPigZombie::targetConditionIsBlue));
+                this.targetSelector.a(2, new McdPathfinderGoalTarget(this,
+                        McdSkeleton.class, 10, true, false, McdPigZombie::targetConditionIsYellow));
             }
         }
 
         if (goalLocation == laneLocation && EntityUtils.isNearLocation(this, laneLocation)) {
-            Bukkit.getLogger().info(this + ": handling isNearLocation lane location ...");
             goalLocation = finalLocation;
             this.goalSelector.c().forEach(PathfinderGoalWrapped::d);
             EntityUtils.clearPathfinderGoalCollections(this);
@@ -83,6 +81,7 @@ public class McdPigZombie extends EntityPigZombie implements McdEntity {
     }
 
     public void initialize(McdMap.Side side, McdMap.Lane lane) {
+        this.setPersistent();
         this.side = side;
         this.laneLocation = McdMap.getLocation(side, lane, McdMap.LaneLocation.LANE);
         this.finalLocation = McdMap.getLocation(side, lane, McdMap.LaneLocation.FINAL);
