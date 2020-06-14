@@ -1,16 +1,13 @@
 # mcdota
-mcdota
 
--GIT benutzen
--Spielfeld design
--Lobby erstellen
-
-- Allen die richtige Rüstung geben
-- Skeletons viel stärker machen
-- Pigs greifen auch Skeletons an
-- Skeletons an allen 18 Positionen
+- Laufen unterbinden
+- Crafting unterbinden
+- Zombie sollen eigene Skelette nicht angreifen wenn sie von diesen getroffen wurden
+- Friendly fire unterbinden
+- Baby Zombies unterbinden
+- Geld bei Kill
 - IRON vs GOLD statt BLUE vs YELLOW
-- Prüfen wie das mit den compute distances ist, damit die ganze Map computed wird
+- Keinen State von Entities und besonders Player persistieren
 - Investigate:
   https://www.spigotmc.org/threads/entity-disappear.355095/
   "I already cancelled ChunkUnloadEvent and added setRemoveWhenFarAway(false) in CreatureSpawnEvent"

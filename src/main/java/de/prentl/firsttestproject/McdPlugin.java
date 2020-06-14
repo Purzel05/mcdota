@@ -4,10 +4,7 @@ import de.prentl.firsttestproject.commands.*;
 import de.prentl.firsttestproject.entities.*;
 import de.prentl.firsttestproject.entities.McdPigZombie;
 import de.prentl.firsttestproject.entities.McdSkeleton;
-import de.prentl.firsttestproject.listener.ChatListener;
-import de.prentl.firsttestproject.listener.JoinListener;
-import de.prentl.firsttestproject.listener.WeatherChangeListener;
-import de.prentl.firsttestproject.listener.QuitListener;
+import de.prentl.firsttestproject.listener.*;
 import de.prentl.firsttestproject.tasks.SendWavesTask;
 import de.prentl.firsttestproject.tasks.UpdateGoalsAndTargetsTask;
 import net.minecraft.server.v1_15_R1.EntityInsentient;
@@ -25,6 +22,8 @@ import java.util.logging.Level;
 
 public final class McdPlugin extends JavaPlugin {
 
+    public static McdPlugin mcdPlugin;
+
     public static final String MAP_WORLD = "world";
 
     public static final List<McdMap.Side> sides = new ArrayList<>();
@@ -37,6 +36,8 @@ public final class McdPlugin extends JavaPlugin {
     public void onLoad() {
         super.onLoad();
         entityRegistration();
+
+        mcdPlugin = this;
     }
 
     @Override
@@ -75,6 +76,10 @@ public final class McdPlugin extends JavaPlugin {
         pluginManager.registerEvents(new QuitListener(), this);
         pluginManager.registerEvents(new ChatListener(), this);
         pluginManager.registerEvents(new WeatherChangeListener(), this);
+        pluginManager.registerEvents(new PlayerDeathListener(), this);
+        pluginManager.registerEvents(new PlayerRespawnListener(), this);
+        pluginManager.registerEvents(new EntityDeathListener(), this);
+        pluginManager.registerEvents(new EntityDamageListener(), this);
     }
 
     private void commandRegistration() {

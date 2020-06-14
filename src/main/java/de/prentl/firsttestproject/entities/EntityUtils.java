@@ -1,6 +1,7 @@
 package de.prentl.firsttestproject.entities;
 
 import com.google.common.collect.Sets;
+import de.prentl.firsttestproject.McdGame;
 import de.prentl.firsttestproject.McdMap;
 import de.prentl.firsttestproject.McdPlugin;
 import net.minecraft.server.v1_15_R1.*;
@@ -11,7 +12,9 @@ import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.craftbukkit.v1_15_R1.entity.CraftLivingEntity;
+import org.bukkit.craftbukkit.v1_15_R1.entity.CraftPlayer;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.lang.reflect.Field;
@@ -21,7 +24,7 @@ public abstract class EntityUtils {
     public static final int WAVES_SIZE = 4;
     private static boolean skeletonsSpawned = false;
 
-    public static void  removeLivingEntities() {
+    public static void removeLivingEntities() {
         Bukkit.getLogger().info("removing all entities");
         World world = Bukkit.getWorld(McdPlugin.MAP_WORLD);
         assert world != null;
@@ -95,18 +98,30 @@ public abstract class EntityUtils {
                 McdEntity mcdEntity = (McdEntity) entityLiving;
                 if (mcdEntity.getSide().equals(McdMap.Side.BLUE)) {
                     Objects.requireNonNull(livingEntity.getEquipment()).setHelmet(new org.bukkit.inventory.ItemStack(org.bukkit.Material.IRON_HELMET));
-                    Objects.requireNonNull(livingEntity.getEquipment()).setChestplate(new org.bukkit.inventory.ItemStack(org.bukkit.Material.IRON_CHESTPLATE));
+                    //Objects.requireNonNull(livingEntity.getEquipment()).setChestplate(new org.bukkit.inventory.ItemStack(org.bukkit.Material.IRON_CHESTPLATE));
                 }
                 if (mcdEntity.getSide().equals(McdMap.Side.YELLOW)) {
                     Objects.requireNonNull(livingEntity.getEquipment()).setHelmet(new org.bukkit.inventory.ItemStack(org.bukkit.Material.GOLDEN_HELMET));
-                    Objects.requireNonNull(livingEntity.getEquipment()).setChestplate(new ItemStack(Material.GOLDEN_CHESTPLATE));
+                    //Objects.requireNonNull(livingEntity.getEquipment()).setChestplate(new ItemStack(Material.GOLDEN_CHESTPLATE));
                 }
             }
 
             if (entityLiving instanceof McdSkeleton) {
                 AttributeInstance movementSpeed = livingEntity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED);
-                assert movementSpeed != null;
-                movementSpeed.setBaseValue(0);
+                if (movementSpeed != null) {
+                    movementSpeed.setBaseValue(0);
+                    Bukkit.getLogger().info("attribute instance GENERIC_MOVEMENT_SPEED set to 0");
+                } else {
+                    Bukkit.getLogger().warning("attribute instance GENERIC_MOVEMENT_SPEED is null");
+                }
+
+                AttributeInstance maxHealth = livingEntity.getAttribute(Attribute.GENERIC_MAX_HEALTH);
+                if (maxHealth != null) {
+                    maxHealth.setBaseValue(200);
+                    Bukkit.getLogger().info("attribute instance GENERIC_MAX_HEALTH set to 200");
+                } else {
+                    Bukkit.getLogger().warning("attribute instance GENERIC_MAX_HEALTH is null");
+                }
             }
         });
     }
@@ -132,5 +147,37 @@ public abstract class EntityUtils {
         return Math.abs(entityInsentient.locX() - vec3D.x) < 2
                 && Math.abs(entityInsentient.locY() - vec3D.y) < 2
                 && Math.abs(entityInsentient.locZ() - vec3D.z) < 2;
+    }
+
+    public static boolean targetConditionIsBlue(Object object) {
+        if (object instanceof McdEntity) {
+            return ((McdEntity) object).getSide().equals(McdMap.Side.BLUE);
+        } else if (object instanceof EntityHuman) {
+            EntityHuman entityHuman = (EntityHuman) object;
+            for (Player player: McdGame.bluePlayers) {
+                CraftPlayer craftPlayer = (CraftPlayer) player;
+                EntityPlayer craftPlayerHandle = craftPlayer.getHandle();
+                if (entityHuman == craftPlayerHandle) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean targetConditionIsYellow(Object object) {
+        if (object instanceof McdEntity) {
+            return ((McdEntity) object).getSide().equals(McdMap.Side.YELLOW);
+        } else if (object instanceof EntityHuman) {
+            EntityHuman entityHuman = (EntityHuman) object;
+            for (Player player: McdGame.yellowPlayers) {
+                CraftPlayer craftPlayer = (CraftPlayer) player;
+                EntityPlayer craftPlayerHandle = craftPlayer.getHandle();
+                if (entityHuman == craftPlayerHandle) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
