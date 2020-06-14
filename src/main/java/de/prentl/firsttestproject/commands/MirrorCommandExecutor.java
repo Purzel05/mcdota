@@ -27,9 +27,9 @@ public class MirrorCommandExecutor implements CommandExecutor {
         for (int i = 0; i <= 100; i++) {
             for (int k = 4; k < 8; k++) {
                 Location location = new Location(world,i,k,0);
-                location.getBlock().setType(Material.STONE);
+                location.getBlock().setType(Material.COAL_BLOCK);
                 location = new Location(world,0,k,i);
-                location.getBlock().setType(Material.STONE);
+                location.getBlock().setType(Material.COAL_BLOCK);
             }
         }
 
