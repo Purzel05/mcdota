@@ -83,6 +83,7 @@ public final class McdPlugin extends JavaPlugin {
         pluginManager.registerEvents(new EntityDeathListener(), this);
         pluginManager.registerEvents(new EntityDamageListener(), this);
         pluginManager.registerEvents(new PlayerToggleSprintListener(), this);
+        pluginManager.registerEvents(new BlockListener(), this);
     }
 
     private void commandRegistration() {
@@ -96,6 +97,7 @@ public final class McdPlugin extends JavaPlugin {
         registerCommand("world", new WorldCommandExecutor());
         registerCommand("sga", new StartGameExecutor());
         registerCommand("logl", new SetLogLevelExecutor());
+        registerCommand("blox", new BloxCommandExecutor());
 
     }
 

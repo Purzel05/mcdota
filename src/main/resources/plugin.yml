@@ -26,3 +26,5 @@ commands:
     description: Das Spiel starten
   logl:
     description: Das loglevel setzen
+  blox:
+    description: Block Crafting erlauben

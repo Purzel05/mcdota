@@ -1,7 +1,5 @@
 # mcdota
 
-- Laufen unterbinden
-- Crafting unterbinden
 - Zombie sollen eigene Skelette nicht angreifen wenn sie von diesen getroffen wurden
 - Friendly fire unterbinden
 - Baby Zombies unterbinden        TESTEN!!
