@@ -9,7 +9,6 @@ public class SpawnPigZombieWaveExecutor implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] strings) {
         EntityUtils.spawnPigZombies();
-        EntityUtils.equipPigZombiesAndSkeletons();
         return false;
     }
 }

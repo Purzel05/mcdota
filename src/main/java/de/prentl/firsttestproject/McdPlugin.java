@@ -89,7 +89,6 @@ public final class McdPlugin extends JavaPlugin {
         registerCommand("lobby", new LobbyCommandExecutor());
         registerCommand("mirr", new MirrorCommandExecutor());
         registerCommand("wave", new SpawnPigZombieWaveExecutor());
-        registerCommand("skels", new SpawnSkeletonsExecutor());
         registerCommand("rme", new RemoveAllExecutorExecutor());
         registerCommand("world", new WorldCommandExecutor());
         registerCommand("sga", new StartGameExecutor());

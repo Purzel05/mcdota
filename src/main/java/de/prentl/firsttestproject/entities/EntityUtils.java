@@ -7,15 +7,12 @@ import de.prentl.firsttestproject.McdPlugin;
 import net.minecraft.server.v1_15_R1.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.craftbukkit.v1_15_R1.entity.CraftLivingEntity;
 import org.bukkit.craftbukkit.v1_15_R1.entity.CraftPlayer;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 import java.lang.reflect.Field;
 import java.util.*;
@@ -76,7 +73,24 @@ public abstract class EntityUtils {
                     Vec3D spawnVec = McdMap.getLocation(side, lane, McdMap.LaneLocation.SPAWN);
                     assert spawnVec != null;
                     Location spawnLocation = new Location(world, spawnVec.x + i, spawnVec.y, spawnVec.z);
-                    McdPigZombie pigZombie = CustomEntityType.pigZombieType.spawn(spawnLocation);
+
+                    McdPigZombie pigZombie = null;
+                    boolean doIt = true;
+                    while (doIt) {
+                        pigZombie = CustomEntityType.pigZombieType.spawn(spawnLocation);
+                        if (pigZombie.isBaby()) {
+                            for (LivingEntity livingEntity : world.getLivingEntities()) {
+                                EntityLiving entityLiving = ((CraftLivingEntity) livingEntity).getHandle();
+                                if (entityLiving == pigZombie) {
+                                    livingEntity.remove();
+                                }
+                            }
+                            Bukkit.getLogger().info("Baby zombie removed ...");
+                        } else {
+                            doIt = false;
+                        }
+                    }
+
                     if (pigZombie != null) {
                         pigZombie.initialize(side, lane);
                         McdPlugin.entitiesInsentient.add(pigZombie);
@@ -86,44 +100,6 @@ public abstract class EntityUtils {
                 }
             }
         }
-    }
-
-    public static void equipPigZombiesAndSkeletons() {
-        World world = Bukkit.getWorld(McdPlugin.MAP_WORLD);
-        assert world != null;
-        world.getLivingEntities().forEach(livingEntity -> {
-            EntityLiving entityLiving = ((CraftLivingEntity)livingEntity).getHandle();
-
-            if (entityLiving instanceof McdEntity) {
-                McdEntity mcdEntity = (McdEntity) entityLiving;
-                if (mcdEntity.getSide().equals(McdMap.Side.BLUE)) {
-                    Objects.requireNonNull(livingEntity.getEquipment()).setHelmet(new org.bukkit.inventory.ItemStack(org.bukkit.Material.IRON_HELMET));
-                    //Objects.requireNonNull(livingEntity.getEquipment()).setChestplate(new org.bukkit.inventory.ItemStack(org.bukkit.Material.IRON_CHESTPLATE));
-                }
-                if (mcdEntity.getSide().equals(McdMap.Side.YELLOW)) {
-                    Objects.requireNonNull(livingEntity.getEquipment()).setHelmet(new org.bukkit.inventory.ItemStack(org.bukkit.Material.GOLDEN_HELMET));
-                    //Objects.requireNonNull(livingEntity.getEquipment()).setChestplate(new ItemStack(Material.GOLDEN_CHESTPLATE));
-                }
-            }
-
-            if (entityLiving instanceof McdSkeleton) {
-                AttributeInstance movementSpeed = livingEntity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED);
-                if (movementSpeed != null) {
-                    movementSpeed.setBaseValue(0);
-                    Bukkit.getLogger().info("attribute instance GENERIC_MOVEMENT_SPEED set to 0");
-                } else {
-                    Bukkit.getLogger().warning("attribute instance GENERIC_MOVEMENT_SPEED is null");
-                }
-
-                AttributeInstance maxHealth = livingEntity.getAttribute(Attribute.GENERIC_MAX_HEALTH);
-                if (maxHealth != null) {
-                    maxHealth.setBaseValue(200);
-                    Bukkit.getLogger().info("attribute instance GENERIC_MAX_HEALTH set to 200");
-                } else {
-                    Bukkit.getLogger().warning("attribute instance GENERIC_MAX_HEALTH is null");
-                }
-            }
-        });
     }
 
     public static void clearPathfinderGoalCollections(EntityInsentient entityInsentient) {
