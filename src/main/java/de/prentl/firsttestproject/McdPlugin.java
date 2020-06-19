@@ -32,6 +32,8 @@ public final class McdPlugin extends JavaPlugin {
 
     public static List<EntityInsentient> entitiesInsentient = new ArrayList<>();
 
+    public static boolean treeMode = false;
+
     @Override
     public void onLoad() {
         super.onLoad();
@@ -98,6 +100,7 @@ public final class McdPlugin extends JavaPlugin {
         registerCommand("sga", new StartGameExecutor());
         registerCommand("logl", new SetLogLevelExecutor());
         registerCommand("blox", new BloxCommandExecutor());
+        registerCommand("tree", new TreeModeExecutor());
 
     }
 
