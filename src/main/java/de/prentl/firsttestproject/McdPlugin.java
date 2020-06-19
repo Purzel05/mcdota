@@ -36,7 +36,6 @@ public final class McdPlugin extends JavaPlugin {
     public void onLoad() {
         super.onLoad();
         entityRegistration();
-
         mcdPlugin = this;
     }
 
@@ -53,21 +52,24 @@ public final class McdPlugin extends JavaPlugin {
         towerLocations.add(McdMap.TowerLocation.MID);
         towerLocations.add(McdMap.TowerLocation.RIVER);
 
-        for (int i = -2; i < 10; i++) {
-            for (int j = -2; j < 10; j++) {
-                Objects.requireNonNull(Bukkit.getWorld(MAP_WORLD)).setChunkForceLoaded(i, j, true);
-            }
-        }
-
-        EntityUtils.removeLivingEntities();
+        setChunksToForceLoaded();
         listenerRegistration();
         commandRegistration();
         repeatingTasksRegistration();
+        EntityUtils.removeLivingEntities();
     }
 
     @Override
     public void onDisable() {
         Bukkit.getLogger().fine("Plugin wird deaktiviert.");
+    }
+
+    private void setChunksToForceLoaded() {
+        for (int i = -2; i < 10; i++) {
+            for (int j = -2; j < 10; j++) {
+                Objects.requireNonNull(Bukkit.getWorld(MAP_WORLD)).setChunkForceLoaded(i, j, true);
+            }
+        }
     }
 
     private void listenerRegistration() {
@@ -80,6 +82,8 @@ public final class McdPlugin extends JavaPlugin {
         pluginManager.registerEvents(new PlayerRespawnListener(), this);
         pluginManager.registerEvents(new EntityDeathListener(), this);
         pluginManager.registerEvents(new EntityDamageListener(), this);
+        pluginManager.registerEvents(new PlayerToggleSprintListener(), this);
+        pluginManager.registerEvents(new BlockListener(), this);
     }
 
     private void commandRegistration() {
@@ -89,11 +93,11 @@ public final class McdPlugin extends JavaPlugin {
         registerCommand("lobby", new LobbyCommandExecutor());
         registerCommand("mirr", new MirrorCommandExecutor());
         registerCommand("wave", new SpawnPigZombieWaveExecutor());
-        registerCommand("skels", new SpawnSkeletonsExecutor());
         registerCommand("rme", new RemoveAllExecutorExecutor());
         registerCommand("world", new WorldCommandExecutor());
         registerCommand("sga", new StartGameExecutor());
         registerCommand("logl", new SetLogLevelExecutor());
+        registerCommand("blox", new BloxCommandExecutor());
 
     }
 

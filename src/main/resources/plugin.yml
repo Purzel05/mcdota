@@ -18,8 +18,6 @@ commands:
     description: Die Spielfeldhälfte spiegeln
   wave:
     description: Eine Wave spawnen
-  skels:
-    description: Skelette spawnen
   rme:
     description: Remove entities
   world:
@@ -28,3 +26,5 @@ commands:
     description: Das Spiel starten
   logl:
     description: Das loglevel setzen
+  blox:
+    description: Block Crafting erlauben
