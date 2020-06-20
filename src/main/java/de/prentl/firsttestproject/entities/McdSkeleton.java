@@ -1,5 +1,6 @@
 package de.prentl.firsttestproject.entities;
 
+import de.prentl.firsttestproject.McdGame;
 import de.prentl.firsttestproject.McdMap;
 import de.prentl.firsttestproject.McdPlugin;
 import net.minecraft.server.v1_15_R1.*;
@@ -12,6 +13,7 @@ import org.bukkit.entity.LivingEntity;
 import java.util.Objects;
 
 public class McdSkeleton extends EntitySkeleton implements McdEntity {
+    private static final int scanRangeQM = 3;
 
     private McdMap.Side side;
     private Vec3D spawnLocation;
@@ -29,15 +31,15 @@ public class McdSkeleton extends EntitySkeleton implements McdEntity {
         // initialization happens on first call of updateGoalsAndTargets()
     }
 
-    public void updateGoalsAndTargets() {
+    public void doEvery1Tick() {
         if (spawnLocation == null) {
             return;
         }
 
         if (this.goalSelector.c().count() == 0) {
-            int scanRangeQM = 4;
+
             this.goalSelector.c().forEach(PathfinderGoalWrapped::d);
-            EntityUtils.clearPathfinderGoalCollections(this);
+            McdGame.clearPathfinderGoalCollections(this);
             this.goalSelector.a(0, new McdPathfinderGoalBowShoot(this, 1.0D, 1, 15.0F ));
             this.goalSelector.a(7, new McdPathfinderGoal(this, spawnLocation));
             if (this.getSide().equals(McdMap.Side.BLUE)) {
@@ -56,11 +58,11 @@ public class McdSkeleton extends EntitySkeleton implements McdEntity {
     }
 
     public static boolean targetConditionBlue(Object object) {
-        return EntityUtils.targetConditionIsYellow(object);
+        return McdGame.targetConditionIsYellow(object);
     }
 
     public static boolean targetConditionYellow(Object object) {
-        return EntityUtils.targetConditionIsBlue(object);
+        return McdGame.targetConditionIsBlue(object);
     }
 
     public void initialize(McdMap.Side side, McdMap.Lane lane, McdMap.TowerLocation location, Vec3D spawnLocation) {

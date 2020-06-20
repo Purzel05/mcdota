@@ -1,5 +1,6 @@
 package de.prentl.firsttestproject.entities;
 
+import de.prentl.firsttestproject.McdGame;
 import de.prentl.firsttestproject.McdMap;
 import de.prentl.firsttestproject.McdPlugin;
 import net.minecraft.server.v1_15_R1.*;
@@ -11,6 +12,9 @@ import org.bukkit.entity.Player;
 import java.util.Objects;
 
 public class McdPigZombie extends EntityPigZombie implements McdEntity {
+    private static final int scanRangeQM = 3;
+    private static final double speedWhileMovingToTarget = 1.0D;
+
     private McdMap.Side side;
 
     public McdPigZombie(World world) {
@@ -30,19 +34,20 @@ public class McdPigZombie extends EntityPigZombie implements McdEntity {
         // initialization happens on first call of updateGoalsAndTargets()
     }
 
-    public void updateGoalsAndTargets() {
+    public void doEvery1Tick() {
         if (goalLocation == null || laneLocation == null) {
             return;
         }
 
-        if (EntityUtils.isNearLocation(this, finalLocation)) {
+        if (McdGame.isNearLocation(this, finalLocation)) {
             this.killEntity();
             return;
         }
 
         if (this.goalSelector.c().count() == 0) {
-            int scanRangeQM = 4;
-            this.goalSelector.a(1, new PathfinderGoalMeleeAttack(this, 1.2D, false));
+
+
+            this.goalSelector.a(1, new McdPathfinderGoalMeleeAttack(this, speedWhileMovingToTarget, false));
             this.goalSelector.a(7, new McdPathfinderGoal(this, goalLocation));
             this.targetSelector.a(1, new McdPathfinderGoalHurtByTarget(this, Player.class));
             if (this.getSide().equals(McdMap.Side.BLUE)) {
@@ -63,21 +68,21 @@ public class McdPigZombie extends EntityPigZombie implements McdEntity {
             }
         }
 
-        if (goalLocation == laneLocation && EntityUtils.isNearLocation(this, laneLocation)) {
+        if (goalLocation == laneLocation && McdGame.isNearLocation(this, laneLocation)) {
             goalLocation = finalLocation;
             this.goalSelector.c().forEach(PathfinderGoalWrapped::d);
-            EntityUtils.clearPathfinderGoalCollections(this);
-            this.goalSelector.a(1, new PathfinderGoalMeleeAttack(this, 1.2D, false));
+            McdGame.clearPathfinderGoalCollections(this);
+            this.goalSelector.a(1, new McdPathfinderGoalMeleeAttack(this, speedWhileMovingToTarget, false));
             this.goalSelector.a(7, new McdPathfinderGoal(this, goalLocation));
         }
     }
 
     public static boolean targetConditionBlue(Object object) {
-        return EntityUtils.targetConditionIsYellow(object);
+        return McdGame.targetConditionIsYellow(object);
     }
 
     public static boolean targetConditionYellow(Object object) {
-        return EntityUtils.targetConditionIsBlue(object);
+        return McdGame.targetConditionIsBlue(object);
     }
 
     public McdMap.Side getSide() {

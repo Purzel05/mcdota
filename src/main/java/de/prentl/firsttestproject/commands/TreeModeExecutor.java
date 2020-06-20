@@ -14,14 +14,14 @@ public class TreeModeExecutor implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         String message;
-        if (args.length == 1 && args[0] != null && args[0].equals("ON")) {
-            McdPlugin.treeMode = true;
-            message = "TreeMode ON!";
-        } else {
+        if (McdPlugin.treeMode) {
             McdPlugin.treeMode = false;
-            message = "TreeMode OFF!";
-
+            message = "treemode is now off";
+        } else {
+            McdPlugin.treeMode = true;
+            message = "treemode is now on";
         }
+
         Bukkit.getLogger().info(message);
         Objects.requireNonNull(Bukkit.getWorld(McdPlugin.MAP_WORLD)).getPlayers().forEach(p -> { p.sendMessage(message);});
         return false;

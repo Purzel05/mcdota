@@ -14,7 +14,7 @@ commands:
     description: Spiel im Gelben Team
   lobby:
     description: Teleport zur Lobby
-  mirr:
+  mirror:
     description: Die Spielfeldhälfte spiegeln
   wave:
     description: Eine Wave spawnen
@@ -22,11 +22,11 @@ commands:
     description: Remove entities
   world:
     description: Eine Welt erstellen
-  sga:
+  game:
     description: Das Spiel starten
   logl:
     description: Das loglevel setzen
-  blox:
+  blocks:
     description: Block Crafting erlauben
   tree:
     description: Tree Mode on

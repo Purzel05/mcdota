@@ -7,11 +7,11 @@ import org.bukkit.Bukkit;
 
 import java.util.List;
 
-public class UpdateGoalsAndTargetsTask implements Runnable {
+public class Every1TickTask implements Runnable {
 
     public List<EntityInsentient> insentients;
 
-    public UpdateGoalsAndTargetsTask(List<EntityInsentient> insentients) {
+    public Every1TickTask(List<EntityInsentient> insentients) {
         this.insentients = insentients;
     }
 
@@ -24,7 +24,7 @@ public class UpdateGoalsAndTargetsTask implements Runnable {
 
         for (EntityInsentient entity: insentients) {
             if (entity != null && entity.isAlive()) {
-                ((McdEntity)entity).updateGoalsAndTargets();
+                ((McdEntity)entity).doEvery1Tick();
             } else {
                 insentients.remove(entity);
                 break;

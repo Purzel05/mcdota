@@ -4,5 +4,5 @@ import de.prentl.firsttestproject.McdMap;
 
 public interface McdEntity {
     McdMap.Side getSide();
-    void updateGoalsAndTargets();
+    void doEvery1Tick();
 }

@@ -6,7 +6,7 @@ import de.prentl.firsttestproject.entities.McdPigZombie;
 import de.prentl.firsttestproject.entities.McdSkeleton;
 import de.prentl.firsttestproject.listener.*;
 import de.prentl.firsttestproject.tasks.SendWavesTask;
-import de.prentl.firsttestproject.tasks.UpdateGoalsAndTargetsTask;
+import de.prentl.firsttestproject.tasks.Every1TickTask;
 import net.minecraft.server.v1_15_R1.EntityInsentient;
 import net.minecraft.server.v1_15_R1.EntityTypes;
 import org.bukkit.Bukkit;
@@ -32,7 +32,8 @@ public final class McdPlugin extends JavaPlugin {
 
     public static List<EntityInsentient> entitiesInsentient = new ArrayList<>();
 
-    public static boolean treeMode = false;
+    public static boolean blocksMode = true;
+    public static boolean treeMode = true;
 
     @Override
     public void onLoad() {
@@ -58,7 +59,7 @@ public final class McdPlugin extends JavaPlugin {
         listenerRegistration();
         commandRegistration();
         repeatingTasksRegistration();
-        EntityUtils.removeLivingEntities();
+        McdGame.removeLivingEntities();
     }
 
     @Override
@@ -93,13 +94,13 @@ public final class McdPlugin extends JavaPlugin {
         registerCommand("blueplay", new BluePlayCommandExecutor());
         registerCommand("yellowplay", new YellowPlayCommandExecutor());
         registerCommand("lobby", new LobbyCommandExecutor());
-        registerCommand("mirr", new MirrorCommandExecutor());
+        registerCommand("mirror", new MirrorCommandExecutor());
         registerCommand("wave", new SpawnPigZombieWaveExecutor());
         registerCommand("rme", new RemoveAllExecutorExecutor());
         registerCommand("world", new WorldCommandExecutor());
-        registerCommand("sga", new StartGameExecutor());
+        registerCommand("game", new StartGameExecutor());
         registerCommand("logl", new SetLogLevelExecutor());
-        registerCommand("blox", new BloxCommandExecutor());
+        registerCommand("blocks", new BlocksCommandExecutor());
         registerCommand("tree", new TreeModeExecutor());
 
     }
@@ -110,17 +111,17 @@ public final class McdPlugin extends JavaPlugin {
     }
 
     private void entityRegistration() {
-        CustomEntityType.pigZombieType = new CustomEntityType <McdPigZombie>
+        McdEntityType.pigZombieType = new McdEntityType<McdPigZombie>
                 ("mcd_pig_zombie", McdPigZombie.class, EntityTypes.ZOMBIE_PIGMAN, McdPigZombie::new);
-        CustomEntityType.pigZombieType.register();
+        McdEntityType.pigZombieType.register();
 
-        CustomEntityType.skeletonType = new CustomEntityType <McdSkeleton>
+        McdEntityType.skeletonType = new McdEntityType<McdSkeleton>
                 ("mcd_skeleton", McdSkeleton.class, EntityTypes.SKELETON, McdSkeleton::new);
-        CustomEntityType.skeletonType.register();
+        McdEntityType.skeletonType.register();
     }
 
     private void repeatingTasksRegistration() {
-        getServer().getScheduler().scheduleSyncRepeatingTask(this, new UpdateGoalsAndTargetsTask(entitiesInsentient), 2L, 20);
+        getServer().getScheduler().scheduleSyncRepeatingTask(this, new Every1TickTask(entitiesInsentient), 1L, 1);
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new SendWavesTask(), 1L, 1000);
     }
 }

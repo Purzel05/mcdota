@@ -10,9 +10,9 @@ import org.bukkit.event.entity.CreatureSpawnEvent;
 import java.lang.reflect.Field;
 import java.util.Map;
 
-public class CustomEntityType<T extends EntityLiving> {
-    public static CustomEntityType<McdPigZombie> pigZombieType;
-    public static CustomEntityType<McdSkeleton> skeletonType;
+public class McdEntityType<T extends EntityLiving> {
+    public static McdEntityType<McdPigZombie> pigZombieType;
+    public static McdEntityType<McdSkeleton> skeletonType;
 
     private static Field REGISTRY_MAT_MAP;
 
@@ -33,7 +33,7 @@ public class CustomEntityType<T extends EntityLiving> {
     private EntityTypes<T> entityType;
     private boolean registered;
 
-    public CustomEntityType(String name, Class<T> customEntityClass, EntityTypes<? super T> parentType, EntityTypes.b<T> maker) {
+    public McdEntityType(String name, Class<T> customEntityClass, EntityTypes<? super T> parentType, EntityTypes.b<T> maker) {
         this.key = MinecraftKey.a(name); // returns null if 256+ chars, non-alphanumeric, or contains uppercase chars
         this.clazz = customEntityClass;
         this.parentType = parentType;

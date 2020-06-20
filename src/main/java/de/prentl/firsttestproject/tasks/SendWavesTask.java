@@ -2,7 +2,6 @@ package de.prentl.firsttestproject.tasks;
 
 import de.prentl.firsttestproject.McdGame;
 import de.prentl.firsttestproject.McdPlugin;
-import de.prentl.firsttestproject.entities.*;
 import org.bukkit.Bukkit;
 
 import java.util.Objects;
@@ -19,8 +18,8 @@ public class SendWavesTask implements Runnable {
                 //player.setExhaustion(1.0F);
             });
 
-            EntityUtils.spawnSkeletons();
-            EntityUtils.spawnPigZombies();
+            McdGame.spawnSkeletons();
+            McdGame.spawnPigZombies();
         }
     }
 }
